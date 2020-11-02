@@ -16,9 +16,7 @@ body {
 }
 
 .wrap {
-    background: url("images/bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: #171717
 }
 
 body a {
