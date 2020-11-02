@@ -16,9 +16,7 @@ body {
 }
 
 .wrap {
-    background-image: url("https://theiphonewalls.com/wp-content/uploads/2014/07/Geometric-shapes.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: #000724;
 }
 
 body a {
