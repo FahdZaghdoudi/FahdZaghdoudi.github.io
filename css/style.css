@@ -11,8 +11,8 @@ html {
 body {
     padding: 0;
     margin: 0;
-    background: #FFF;
-	font-family: 'Libre Franklin', sans-serif;
+    background-image: url("images/bg.jpg");
+    font-family: 'Libre Franklin', sans-serif;
 }
 
 .wrap {
