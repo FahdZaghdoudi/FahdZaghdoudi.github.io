@@ -16,11 +16,11 @@ body {
 }
 
 .wrap {
-    background: #3369e7;
     background: url("images/bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 body a {
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
