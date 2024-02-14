@@ -298,31 +298,23 @@
 			
         <div class="wrapper">
             <form class="form1" action="http://google.com">
-                <div class="formtitle">
-                    Enter the password to proceed
-                </div>
-
                 <div class="input nobottomborder">
-                    <div class="inputtext">
-                        Password:
-                    </div>
-
                     <div class="inputcontent">
                         <input type="password" id="password" /><br />
                     </div>
                 </div>
 
                 <div class="buttons">
-                    <input class="orangebutton" type="button" value="Login" onclick="checkPassword()" />
+                    <input class="btn btn-info" type="button" value="FE" onclick="checkPassword()" />
                 </div>
             </form>
         </div>
 
        <script>
       function checkPassword(){
-       if(document.getElementById('password').value == 'hello'){
+       if(document.getElementById('password').value == '31.71.69'){
         alert('Correct Password!'); 
-          location.href = "http://google.com";
+          location.href = "index2.html";
          } else {
          alert('Wrong Password!');
           return false;
