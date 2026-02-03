@@ -19,24 +19,60 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffe6ef;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     font-family: "Pacifico", cursive;
     overflow: hidden;
 }
 
+/* Floating romantic hearts background */
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    transform: rotate(45deg);
+    animation: float 6s infinite ease-in-out;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+.heart::before { left: -10px; }
+.heart::after { top: -10px; }
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
+
+/* Center container */
 .container {
     text-align: center;
+    background: rgba(255,255,255,0.2);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
 }
 
 h1 {
-    font-size: 48px;
-    color: #d63384;
-    margin-bottom: 40px;
-}
-
-/* Hide the checkbox (CSS trick for click effect) */
-#yes-check {
-    display: none;
+    font-size: 50px;
+    color: white;
+    margin-bottom: 30px;
 }
 
 /* Buttons */
@@ -46,7 +82,7 @@ h1 {
     gap: 40px;
 }
 
-label, .no-btn {
+button {
     padding: 15px 35px;
     font-size: 24px;
     border-radius: 25px;
@@ -56,32 +92,20 @@ label, .no-btn {
 }
 
 /* YES button */
-.yes-btn {
+#yesBtn {
     background: #ff4d6d;
     color: white;
 }
 
 /* NO button */
-.no-btn {
-    background: #ccc;
+#noBtn {
+    background: #eee;
     color: #333;
-    transition: transform 0.2s ease, scale 0.1s ease;
+    position: relative;
+    transition: transform 0.15s ease, scale 0.1s ease;
 }
 
-/* Make NO run away when hovered */
-.no-btn:hover {
-    transform: translate(
-        calc(100px - 200px * random),
-        calc(80px - 160px * random)
-    );
-}
-
-/* Slight shrink when clicked */
-.no-btn:active {
-    scale: 0.85;
-}
-
-/* Party / confetti container (hidden by default) */
+/* Party effect (hidden initially) */
 .party {
     position: fixed;
     top: 0;
@@ -92,67 +116,85 @@ label, .no-btn {
     display: none;
 }
 
-/* Show party when YES is clicked */
-#yes-check:checked ~ .party {
-    display: block;
-}
-
 /* Confetti pieces */
 .confetti {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: red;
+    background: white;
     animation: fall 2s linear infinite;
 }
 
-/* Create multiple confetti pieces */
-.confetti:nth-child(1) { left: 10%; background: #ff4d6d; animation-delay: 0s; }
-.confetti:nth-child(2) { left: 30%; background: #ffd166; animation-delay: 0.2s; }
-.confetti:nth-child(3) { left: 50%; background: #06d6a0; animation-delay: 0.4s; }
-.confetti:nth-child(4) { left: 70%; background: #118ab2; animation-delay: 0.6s; }
-.confetti:nth-child(5) { left: 90%; background: #ef476f; animation-delay: 0.8s; }
+/* Spread confetti */
+.confetti:nth-child(1) { left: 10%; animation-delay: 0s; }
+.confetti:nth-child(2) { left: 30%; animation-delay: 0.2s; }
+.confetti:nth-child(3) { left: 50%; animation-delay: 0.4s; }
+.confetti:nth-child(4) { left: 70%; animation-delay: 0.6s; }
+.confetti:nth-child(5) { left: 90%; animation-delay: 0.8s; }
 
-/* Falling confetti animation */
 @keyframes fall {
-    from {
-        top: -10%;
-        transform: rotate(0deg);
-        opacity: 1;
-    }
-    to {
-        top: 110%;
-        transform: rotate(360deg);
-        opacity: 0;
-    }
+    from { top: -10%; transform: rotate(0deg); opacity: 1; }
+    to { top: 110%; transform: rotate(360deg); opacity: 0; }
+}
+
+/* Message after YES */
+#celebrationText {
+    display: none;
+    color: white;
+    font-size: 32px;
+    margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="hearts">
+    <div class="heart" style="left:10%; animation-delay:0s;"></div>
+    <div class="heart" style="left:30%; animation-delay:1s;"></div>
+    <div class="heart" style="left:50%; animation-delay:2s;"></div>
+    <div class="heart" style="left:70%; animation-delay:3s;"></div>
+    <div class="heart" style="left:90%; animation-delay:4s;"></div>
+</div>
 
+<div class="container">
     <h1>Will you be my Valentine? 💖</h1>
 
-    <!-- Hidden checkbox that controls the party effect -->
-    <input type="checkbox" id="yes-check">
-
     <div class="buttons">
-        <label for="yes-check" class="yes-btn">YES</label>
-        <button class="no-btn">NO</button>
+        <button id="yesBtn">YES</button>
+        <button id="noBtn">NO</button>
     </div>
 
+    <div id="celebrationText">She said YES! 🎉💘</div>
 </div>
 
-<!-- Party effect -->
-<div class="party">
+<div class="party" id="party">
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
 </div>
+
+<script>
+// YES button behavior
+document.getElementById("yesBtn").addEventListener("click", function() {
+    document.getElementById("party").style.display = "block";
+    document.getElementById("celebrationText").style.display = "block";
+});
+
+// NO button behavior: move away on hover + on click
+const noBtn = document.getElementById("noBtn");
+
+function moveNoButton() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px) scale(0.9)`;
+}
+
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+</script>
 
 </body>
 </html>
