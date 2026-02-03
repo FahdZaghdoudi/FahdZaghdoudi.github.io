@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Proposal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffe6ef;
+    font-family: "Pacifico", cursive;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    color: #d63384;
+    margin-bottom: 40px;
+}
+
+/* Hide the checkbox (CSS trick for click effect) */
+#yes-check {
+    display: none;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+label, .no-btn {
+    padding: 15px 35px;
+    font-size: 24px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-family: "Pacifico", cursive;
+}
+
+/* YES button */
+.yes-btn {
+    background: #ff4d6d;
+    color: white;
+}
+
+/* NO button */
+.no-btn {
+    background: #ccc;
+    color: #333;
+    transition: transform 0.2s ease, scale 0.1s ease;
+}
+
+/* Make NO run away when hovered */
+.no-btn:hover {
+    transform: translate(
+        calc(100px - 200px * random),
+        calc(80px - 160px * random)
+    );
+}
+
+/* Slight shrink when clicked */
+.no-btn:active {
+    scale: 0.85;
+}
+
+/* Party / confetti container (hidden by default) */
+.party {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+}
+
+/* Show party when YES is clicked */
+#yes-check:checked ~ .party {
+    display: block;
+}
+
+/* Confetti pieces */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    animation: fall 2s linear infinite;
+}
+
+/* Create multiple confetti pieces */
+.confetti:nth-child(1) { left: 10%; background: #ff4d6d; animation-delay: 0s; }
+.confetti:nth-child(2) { left: 30%; background: #ffd166; animation-delay: 0.2s; }
+.confetti:nth-child(3) { left: 50%; background: #06d6a0; animation-delay: 0.4s; }
+.confetti:nth-child(4) { left: 70%; background: #118ab2; animation-delay: 0.6s; }
+.confetti:nth-child(5) { left: 90%; background: #ef476f; animation-delay: 0.8s; }
+
+/* Falling confetti animation */
+@keyframes fall {
+    from {
+        top: -10%;
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        top: 110%;
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <!-- Hidden checkbox that controls the party effect -->
+    <input type="checkbox" id="yes-check">
+
+    <div class="buttons">
+        <label for="yes-check" class="yes-btn">YES</label>
+        <button class="no-btn">NO</button>
+    </div>
+
+</div>
+
+<!-- Party effect -->
+<div class="party">
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+</div>
+
+</body>
+</html>
