@@ -6,14 +6,14 @@
   <title>دعوة زفاف فهد و إلهام</title>
   <style>
     :root {
-      --bg1: #fbf4ef;
-      --bg2: #f3dde3;
-      --rose: #c88c9b;
-      --deep-rose: #8f4e61;
+      --bg1: #ffffff;
+      --bg2: #fffafc;
+      --rose: #d9a8b5;
+      --deep-rose: #9d6171;
       --gold: #d8b07a;
-      --paper: rgba(255, 250, 245, 0.97);
+      --paper: rgba(255, 255, 255, 0.985);
       --ink: #4e3138;
-      --shadow: 0 24px 60px rgba(92, 53, 64, 0.18);
+      --shadow: 0 24px 60px rgba(170, 140, 150, 0.14);
     }
 
     * { box-sizing: border-box; }
@@ -23,8 +23,8 @@
       padding: 0;
       min-height: 100%;
       background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.9), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(255,255,255,0.55), transparent 22%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.98), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255,248,251,0.9), transparent 22%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
       color: var(--ink);
       overflow-x: hidden;
@@ -37,11 +37,11 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 10% 18%, rgba(216,176,122,0.18), transparent 10%),
-        radial-gradient(circle at 86% 14%, rgba(200,140,155,0.20), transparent 12%),
-        radial-gradient(circle at 16% 84%, rgba(200,140,155,0.15), transparent 12%),
-        radial-gradient(circle at 80% 82%, rgba(216,176,122,0.16), transparent 12%);
-      filter: blur(8px);
+        radial-gradient(circle at 10% 18%, rgba(216,176,122,0.12), transparent 10%),
+        radial-gradient(circle at 86% 14%, rgba(217,168,181,0.14), transparent 12%),
+        radial-gradient(circle at 16% 84%, rgba(217,168,181,0.10), transparent 12%),
+        radial-gradient(circle at 80% 82%, rgba(216,176,122,0.10), transparent 12%);
+      filter: blur(10px);
       z-index: 0;
     }
 
@@ -59,14 +59,14 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.45;
+      opacity: 0.38;
       background-image:
-        radial-gradient(circle at 8% 10%, rgba(200,140,155,0.34) 0 18px, transparent 19px),
-        radial-gradient(circle at 12% 13%, rgba(255,255,255,0.76) 0 6px, transparent 7px),
-        radial-gradient(circle at 92% 8%, rgba(200,140,155,0.34) 0 18px, transparent 19px),
-        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.76) 0 6px, transparent 7px),
-        radial-gradient(circle at 10% 90%, rgba(200,140,155,0.25) 0 22px, transparent 23px),
-        radial-gradient(circle at 90% 88%, rgba(200,140,155,0.25) 0 22px, transparent 23px);
+        radial-gradient(circle at 8% 10%, rgba(217,168,181,0.20) 0 18px, transparent 19px),
+        radial-gradient(circle at 12% 13%, rgba(255,255,255,0.92) 0 6px, transparent 7px),
+        radial-gradient(circle at 92% 8%, rgba(217,168,181,0.20) 0 18px, transparent 19px),
+        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.92) 0 6px, transparent 7px),
+        radial-gradient(circle at 10% 90%, rgba(217,168,181,0.16) 0 22px, transparent 23px),
+        radial-gradient(circle at 90% 88%, rgba(217,168,181,0.16) 0 22px, transparent 23px);
       background-repeat: no-repeat;
     }
 
@@ -138,21 +138,10 @@
     }
 
     .envelope-back, .envelope-front, .flap, .letter {
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-    }
-
-    .envelope-back {
-      background: linear-gradient(145deg, #f9efe7, #f0ddd3);
-      border: 1px solid rgba(143, 78, 97, 0.15);
-    }
-
-    .letter {
       inset: 5.5%;
-      background: linear-gradient(180deg, rgba(255,250,245,1), rgba(252,243,237,1));
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(255,250,252,1));
       border-radius: 16px;
-      box-shadow: 0 14px 30px rgba(83, 45, 55, 0.12);
+      box-shadow: 0 14px 30px rgba(170, 140, 150, 0.12);
       padding: 7% 8%;
       display: flex;
       flex-direction: column;
@@ -179,17 +168,19 @@
 
     .flap {
       clip-path: polygon(0 0, 100% 0, 50% 62%);
-      background: linear-gradient(180deg, #f7e8de, #edd4c8);
+      background: linear-gradient(180deg, #fff8fb, #f3dfe6);
       transform-origin: top center;
       transition: transform 1s ease;
       z-index: 4;
+      pointer-events: none;
     }
 
     .envelope-front {
-      background: linear-gradient(160deg, #f3dfd5, #ebd2c7);
+      background: linear-gradient(160deg, #fff8fb, #f2dce4);
       clip-path: polygon(0 32%, 50% 68%, 100% 32%, 100% 100%, 0 100%);
       z-index: 5;
-      border: 1px solid rgba(143, 78, 97, 0.12);
+      border: 1px solid rgba(157, 97, 113, 0.10);
+      pointer-events: none;
     }
 
     .seal {
@@ -200,14 +191,16 @@
       width: clamp(74px, 10vw, 98px);
       height: clamp(74px, 10vw, 98px);
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #e8c58e, #c99254 70%);
-      box-shadow: 0 8px 18px rgba(0,0,0,.15);
-      border: 2px solid rgba(255,255,255,.6);
+      background: radial-gradient(circle at 30% 30%, #efd3a7, #d5a15f 70%);
+      box-shadow: 0 8px 18px rgba(0,0,0,.12);
+      border: 2px solid rgba(255,255,255,.85);
       display: grid;
       place-items: center;
-      z-index: 6;
+      z-index: 10;
       cursor: pointer;
       transition: transform .25s ease, box-shadow .25s ease;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .seal:hover {
@@ -220,21 +213,7 @@
       color: #fffaf5;
     }
 
-    .hint {
-      position: absolute;
-      bottom: 7%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 7;
-      font-size: clamp(.92rem, 1.9vw, 1rem);
-      color: var(--deep-rose);
-      background: rgba(255,250,245,.78);
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(143,78,97,.12);
-      backdrop-filter: blur(6px);
-      white-space: nowrap;
-    }
+    
 
     .envelope.open .flap { transform: rotateX(180deg); }
     .envelope.open .letter { transform: translateY(-18%); }
@@ -242,7 +221,7 @@
     .content {
       width: min(95vw, 980px);
       background: var(--paper);
-      border: 1px solid rgba(143, 78, 97, 0.12);
+      border: 1px solid rgba(157, 97, 113, 0.10);
       box-shadow: var(--shadow);
       border-radius: 30px;
       padding: clamp(24px, 4.8vw, 54px);
@@ -455,10 +434,10 @@
         </div>
         <div class="flap"></div>
         <div class="envelope-front"></div>
-        <button class="seal" id="openBtn" aria-label="Open invitation">
+        <button type="button" class="seal" id="openBtn" aria-label="Open invitation">
           <span>♡</span>
         </button>
-        <div class="hint">اضغط على الختم لفتح الدعوة</div>
+        
       </div>
     </section>
 
@@ -513,20 +492,28 @@
     const content = document.getElementById('content');
     const bgMusic = document.getElementById('bgMusic');
 
-    openBtn.addEventListener('click', async () => {
+    function openInvitation() {
       envelope.classList.add('open');
 
       try {
-        bgMusic.volume = 0.25;
-        await bgMusic.play();
+        if (bgMusic.getAttribute('src')) {
+          bgMusic.volume = 0.25;
+          await bgMusic.play();
+        }
       } catch (e) {
-        // no-op if browser blocks or no audio source is set
       }
 
       setTimeout(() => {
         envelopeWrap.classList.add('hidden');
         content.classList.add('show');
       }, 1100);
+    }
+
+    openBtn.addEventListener('click', openInvitation);
+    envelope.addEventListener('click', (e) => {
+      if (!envelope.classList.contains('open')) {
+        openInvitation();
+      }
     });
 
     const targetDate = new Date('2026-12-21T20:00:00');
