@@ -1,614 +1,171 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>دعوة زفاف فهد و إلهام</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa+Ink:wght@400;700&family=Lateef&display=swap');
-    :root {
-      --white: #ffffff;
-      --white-soft: #fffdfb;
-      --white-warm: #fffaf5;
-      --gold: #cfa35a;
-      --gold-soft: #e8c98f;
-      --gold-deep: #9d7333;
-      --rose-gold: #c8a27b;
-      --ink: #534036;
-      --shadow: 0 24px 70px rgba(207, 163, 90, 0.14);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دعوة زفاف فهد و إلهام</title>
 
-    * { box-sizing: border-box; }
+<!-- Elegant Arabic Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa&family=Lateef&display=swap" rel="stylesheet">
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      font-family: "Tahoma", "Arial", sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.96), transparent 30%),
-        radial-gradient(circle at bottom left, rgba(255,250,245,0.85), transparent 24%),
-        linear-gradient(135deg, var(--white), var(--white-warm));
-      color: var(--ink);
-      overflow-x: hidden;
-    }
+<style>
+:root{
+  --gold:#d4af37;
+  --gold-soft:#e7c873;
+  --bg:#f6efe6;
+  --bg2:#fff8f0;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 10% 18%, rgba(232, 201, 143, 0.18), transparent 10%),
-        radial-gradient(circle at 88% 14%, rgba(207, 163, 90, 0.14), transparent 10%),
-        radial-gradient(circle at 18% 84%, rgba(232, 201, 143, 0.12), transparent 12%),
-        radial-gradient(circle at 82% 82%, rgba(207, 163, 90, 0.10), transparent 12%);
-      filter: blur(12px);
-      z-index: 0;
-    }
+body{
+  margin:0;
+  font-family:'Amiri',serif;
+  background:linear-gradient(135deg,var(--bg),var(--bg2));
+  overflow:hidden;
+}
 
-    .page {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      z-index: 1;
-    }
+/* BACKGROUND WEDDING STYLE */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(212,175,55,0.15),transparent 40%),
+    radial-gradient(circle at 80% 80%,rgba(212,175,55,0.15),transparent 40%);
+}
 
-    .ornaments,
-    .petals {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
+/* ENVELOPE */
+.envelope{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:320px;
+  height:220px;
+  background:#fff;
+  border:2px solid var(--gold-soft);
+  box-shadow:0 20px 50px rgba(0,0,0,0.1);
+  cursor:pointer;
+  overflow:hidden;
+}
 
-    .ornaments::before,
-    .ornaments::after {
-      content: "";
-      position: absolute;
-      width: 340px;
-      height: 340px;
-      opacity: 0.65;
-      background-repeat: no-repeat;
-      background-size: contain;
-      filter: drop-shadow(0 10px 18px rgba(207,163,90,0.10));
-    }
+.flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(180deg,#fff,var(--bg));
+  clip-path:polygon(0 0,100% 0,50% 60%);
+  transform-origin:top;
+  transition:1s;
+  z-index:2;
+}
 
-    .ornaments::before {
-      top: 0;
-      right: 0;
-      background-image:
-        radial-gradient(circle at 72% 18%, rgba(255,255,255,0.95) 0 10px, rgba(207,163,90,0.95) 11px 13px, transparent 14px),
-        radial-gradient(circle at 80% 24%, rgba(255,255,255,0.95) 0 12px, rgba(207,163,90,0.95) 13px 15px, transparent 16px),
-        linear-gradient(140deg, transparent 56%, rgba(207,163,90,0.85) 56.5%, transparent 58%),
-        linear-gradient(155deg, transparent 52%, rgba(232,201,143,0.9) 52.5%, transparent 54%),
-        radial-gradient(circle at 64% 28%, rgba(255,255,255,0.94) 0 18px, rgba(207,163,90,0.75) 19px 21px, transparent 22px),
-        conic-gradient(from 120deg at 66% 32%, transparent 0 60deg, rgba(207,163,90,0.9) 60deg 66deg, transparent 66deg 360deg);
-    }
+.envelope.open .flap{
+  transform:rotateX(180deg);
+}
 
-    .ornaments::after {
-      bottom: 0;
-      left: 0;
-      transform: rotate(180deg);
-      background-image:
-        radial-gradient(circle at 72% 18%, rgba(255,255,255,0.95) 0 10px, rgba(207,163,90,0.95) 11px 13px, transparent 14px),
-        radial-gradient(circle at 80% 24%, rgba(255,255,255,0.95) 0 12px, rgba(207,163,90,0.95) 13px 15px, transparent 16px),
-        linear-gradient(140deg, transparent 56%, rgba(207,163,90,0.85) 56.5%, transparent 58%),
-        linear-gradient(155deg, transparent 52%, rgba(232,201,143,0.9) 52.5%, transparent 54%),
-        radial-gradient(circle at 64% 28%, rgba(255,255,255,0.94) 0 18px, rgba(207,163,90,0.75) 19px 21px, transparent 22px),
-        conic-gradient(from 120deg at 66% 32%, transparent 0 60deg, rgba(207,163,90,0.9) 60deg 66deg, transparent 66deg 360deg);
-    }
+.seal{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:60px;
+  height:60px;
+  background:var(--gold);
+  border-radius:50%;
+  z-index:3;
+}
 
-    .petal {
-      position: absolute;
-      top: -12vh;
-      width: 18px;
-      height: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(232,201,143,0.9));
-      border-radius: 65% 35% 70% 30% / 60% 40% 60% 40%;
-      opacity: 0.86;
-      box-shadow: 0 0 10px rgba(232,201,143,0.3);
-      animation-name: petalsFall, petalsSway;
-      animation-timing-function: linear, ease-in-out;
-      animation-iteration-count: infinite, infinite;
-    }
+/* CONTENT */
+.content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  opacity:0;
+  transition:1s;
+  text-align:center;
+  padding:20px;
+}
 
-    .petal:nth-child(1) { right: 5%; animation-duration: 10s, 4s; animation-delay: 0s, 0s; }
-    .petal:nth-child(2) { right: 14%; animation-duration: 13s, 5s; animation-delay: 2s, 1s; transform: scale(.9); }
-    .petal:nth-child(3) { right: 22%; animation-duration: 11s, 3.8s; animation-delay: 1s, .5s; transform: scale(1.05); }
-    .petal:nth-child(4) { right: 31%; animation-duration: 15s, 4.8s; animation-delay: 3s, .8s; }
-    .petal:nth-child(5) { right: 40%; animation-duration: 12s, 4.2s; animation-delay: .5s, 1.2s; transform: scale(.8); }
-    .petal:nth-child(6) { right: 49%; animation-duration: 16s, 5.2s; animation-delay: 4s, 0s; }
-    .petal:nth-child(7) { right: 60%; animation-duration: 11.5s, 3.6s; animation-delay: 2.5s, 1.3s; transform: scale(1.1); }
-    .petal:nth-child(8) { right: 69%; animation-duration: 13s, 4.4s; animation-delay: 1.8s, .6s; }
-    .petal:nth-child(9) { right: 78%; animation-duration: 15.5s, 5.4s; animation-delay: 3.4s, 1.5s; transform: scale(.88); }
-    .petal:nth-child(10) { right: 86%; animation-duration: 12.5s, 4s; animation-delay: .8s, .9s; }
-    .petal:nth-child(11) { right: 93%; animation-duration: 14.5s, 4.6s; animation-delay: 2.2s, .3s; transform: scale(.95); }
+.show{
+  opacity:1;
+}
 
-    @keyframes petalsFall {
-      0% { top: -12vh; transform: translateY(0) rotate(0deg); }
-      100% { top: 112vh; transform: translateY(0) rotate(360deg); }
-    }
+.basmala{
+  font-family:'Lateef';
+  font-size:42px;
+}
 
-    @keyframes petalsSway {
-      0%, 100% { margin-right: 0; }
-      25% { margin-right: 14px; }
-      50% { margin-right: -10px; }
-      75% { margin-right: 18px; }
-    }
+.names{
+  font-family:'Aref Ruqaa';
+  font-size:50px;
+  color:var(--gold);
+}
 
-    .envelope-wrap {
-      width: min(94vw, 760px);
-      perspective: 1800px;
-      transition: opacity .6s ease, transform .6s ease;
-      z-index: 3;
-    }
+/* PETALS */
+.petal{
+  position:absolute;
+  width:12px;
+  height:18px;
+  background:var(--gold-soft);
+  opacity:0.7;
+  border-radius:50%;
+  animation:fall linear infinite;
+}
 
-    .envelope-wrap.hidden {
-      opacity: 0;
-      transform: scale(.98) translateY(-16px);
-      pointer-events: none;
-    }
+@keyframes fall{
+  from{transform:translateY(-100px);} 
+  to{transform:translateY(100vh);} 
+}
 
-    .envelope {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1.38 / 1;
-      cursor: pointer;
-      filter: drop-shadow(0 26px 45px rgba(207,163,90,0.16));
-    }
-
-    .env-back,
-    .env-front,
-    .env-flap,
-    .mini-card {
-      inset: 6%;
-      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(255,253,250,1));
-      border: 1px solid rgba(207,163,90,0.25);
-      box-shadow: 0 18px 40px rgba(207,163,90,0.12);
-      padding: 10% 8%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: transform 1s ease;
-      overflow: hidden;
-      backdrop-filter: blur(2px);
-    }
-
-    .mini-card::before {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border: 1px solid rgba(207,163,90,0.22);
-      border-radius: 16px;
-      pointer-events: none;
-    }
-
-    .mini-eyebrow {
-      font-size: .8rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold-deep);
-      margin-bottom: 12px;
-      font-family: 'Amiri', serif;
-    }
-
-    .mini-names {
-      font-family: 'Aref Ruqaa Ink', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      color: var(--gold-deep);
-      line-height: 1.2;
-      margin: 0;
-      letter-spacing: 0.03em;
-      text-shadow: 0 2px 0 rgba(232,201,143,0.25);
-    }
-
-    .mini-text {
-      margin: 14px 0 0;
-      font-size: clamp(1rem, 2vw, 1.1rem);
-      line-height: 2;
-      color: #8a6f55;
-      max-width: 500px;
-      font-family: 'Amiri', serif;
-    }
-
-    .env-flap {
-      clip-path: polygon(0 0, 100% 0, 50% 64%);
-      background: linear-gradient(180deg, #fffdf8, #f6ead9);
-      transform-origin: top center;
-      transition: transform 1s ease;
-      z-index: 4;
-      pointer-events: none;
-      border-top: 1px solid rgba(207,163,90,0.22);
-    }
-
-    .env-front {
-      background: linear-gradient(160deg, #fffdf9, #f8ebda);
-      clip-path: polygon(0 33%, 50% 68%, 100% 33%, 100% 100%, 0 100%);
-      z-index: 5;
-      border: 1px solid rgba(207,163,90,0.24);
-      pointer-events: none;
-    }
-
-    .seal {
-      position: absolute;
-      left: 50%;
-      top: 46%;
-      transform: translate(-50%, -50%);
-      width: clamp(76px, 10vw, 100px);
-      height: clamp(76px, 10vw, 100px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #f2ddb8, #cfa35a 72%);
-      border: 2px solid rgba(255,255,255,0.92);
-      box-shadow: 0 12px 22px rgba(157,115,51,0.18);
-      display: grid;
-      place-items: center;
-      z-index: 8;
-      appearance: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    .seal:hover {
-      transform: translate(-50%, -50%) scale(1.05);
-      box-shadow: 0 15px 26px rgba(157,115,51,0.24);
-    }
-
-    .seal span {
-      color: #fffdfa;
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-    }
-
-    .envelope.open .env-flap { transform: rotateX(180deg); }
-    .envelope.open .mini-card { transform: translateY(-20%); }
-
-    .content {
-      position: relative;
-      width: min(96vw, 980px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.985), rgba(255,252,248,0.985));
-      border: 1px solid rgba(207,163,90,0.18);
-      box-shadow: var(--shadow);
-      border-radius: 34px;
-      padding: clamp(24px, 5vw, 56px);
-      text-align: center;
-      opacity: 0;
-      transform: translateY(24px) scale(.985);
-      pointer-events: none;
-      transition: opacity .9s ease, transform .9s ease;
-      z-index: 2;
-      overflow: hidden;
-    }
-
-    .content.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
-    .content::before {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border: 1px solid rgba(207,163,90,0.22);
-      border-radius: 26px;
-      pointer-events: none;
-    }
-
-    .sparkles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .sparkles span {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(207,163,90,.8);
-      box-shadow: 0 0 12px rgba(207,163,90,.8);
-      animation: float 6s linear infinite;
-      opacity: 0;
-    }
-
-    .sparkles span:nth-child(1) { right: 12%; animation-delay: 0s; }
-    .sparkles span:nth-child(2) { right: 28%; animation-delay: 1.2s; }
-    .sparkles span:nth-child(3) { right: 46%; animation-delay: 2.2s; }
-    .sparkles span:nth-child(4) { right: 64%; animation-delay: .7s; }
-    .sparkles span:nth-child(5) { right: 82%; animation-delay: 2.8s; }
-
-    @keyframes float {
-      0% { transform: translateY(100%) scale(.6); opacity: 0; }
-      15% { opacity: .9; }
-      80% { opacity: .8; }
-      100% { transform: translateY(-120%) scale(1.2); opacity: 0; }
-    }
-
-    .basmala {
-      font-family: 'Lateef', 'Amiri', serif;
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      line-height: 1.3;
-      margin: 0;
-      color: #2d241f;
-      letter-spacing: 0.05em;
-      text-shadow: 0 2px 0 rgba(232,201,143,0.25);
-    }
-
-    .salawat {
-      margin: 10px auto 22px;
-      font-size: clamp(1rem, 2.2vw, 1.22rem);
-      line-height: 2;
-      color: #7b624e;
-      max-width: 760px;
-    }
-
-    .blessing {
-      max-width: 830px;
-      margin: 0 auto 26px;
-      font-size: clamp(1.02rem, 2.35vw, 1.26rem);
-      line-height: 2.1;
-      font-weight: 700;
-      color: #4d3d31;
-    }
-
-    .body-text {
-      max-width: 860px;
-      margin: 0 auto;
-      font-size: clamp(1.05rem, 2.45vw, 1.42rem);
-      line-height: 2.15;
-      color: #4a382e;
-    }
-
-    .family {
-      font-weight: 700;
-      color: var(--gold-deep);
-    }
-
-    .names {
-      display: inline-block;
-      margin: 22px 0 14px;
-      font-family: 'Aref Ruqaa Ink', serif;
-      font-size: clamp(2.8rem, 7vw, 5.8rem);
-      line-height: 1.2;
-      color: var(--gold-deep);
-      letter-spacing: 0.04em;
-      text-shadow: 0 3px 0 rgba(232,201,143,0.25);
-    }
-
-    .amp {
-      display: block;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      color: var(--gold-soft);
-      margin: 6px 0;
-    }
-
-    .date-pill {
-      display: inline-block;
-      margin: 24px auto 10px;
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(207,163,90,0.34);
-      background: rgba(255,255,255,0.88);
-      color: var(--gold-deep);
-      box-shadow: 0 8px 18px rgba(207,163,90,0.10);
-      font-size: clamp(1rem, 2vw, 1.12rem);
-    }
-
-    .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(10px, 2vw, 18px);
-      margin-top: 28px;
-      direction: ltr;
-    }
-
-    .time-box {
-      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,251,246,.98));
-      border: 1px solid rgba(207,163,90,.16);
-      border-radius: 24px;
-      padding: clamp(16px, 3vw, 24px);
-      box-shadow: 0 10px 22px rgba(207,163,90,.08);
-    }
-
-    .time-value {
-      display: block;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 700;
-      color: var(--gold-deep);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .time-label {
-      font-size: clamp(.86rem, 1.8vw, .98rem);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: #9f8465;
-    }
-
-    .final-line {
-      margin-top: 30px;
-      font-size: clamp(1rem, 2vw, 1.14rem);
-      color: #8a6a45;
-      font-style: italic;
-    }
-
-    .sound-note {
-      margin-top: 10px;
-      font-size: .95rem;
-      color: #9a8267;
-    }
-
-    @media (max-width: 760px) {
-      .countdown { grid-template-columns: repeat(2, 1fr); }
-      .envelope { aspect-ratio: 1 / 1.08; }
-      .mini-card { padding: 10% 8%; }
-      .ornaments::before,
-      .ornaments::after { width: 240px; height: 240px; opacity: .52; }
-    }
-
-    @media (max-width: 430px) {
-      .content { border-radius: 26px; }
-      .time-box { border-radius: 18px; }
-      .basmala { font-size: clamp(1.9rem, 8vw, 3.2rem); }
-      .names { font-size: clamp(2.2rem, 10vw, 3.8rem); }
-      .mini-names { font-size: clamp(1.8rem, 8vw, 2.7rem); }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="ornaments"></div>
-  <div class="petals" aria-hidden="true">
-    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
-    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
-    <span class="petal"></span><span class="petal"></span><span class="petal"></span>
-  </div>
 
-  <main class="page">
-    <section class="envelope-wrap" id="envelopeWrap">
-      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="فتح الدعوة">
-        <div class="env-back"></div>
-        <div class="mini-card">
-          <div class="mini-eyebrow">Wedding Invitation</div>
-          <h2 class="mini-names">فهد<br>&amp;<br>إلهام</h2>
-          <p class="mini-text">دعوة فاخرة بيضاء وذهبية لليلة العمر</p>
-        </div>
-        <div class="env-flap"></div>
-        <div class="env-front"></div>
-        <button type="button" class="seal" id="openBtn" aria-label="فتح الدعوة">
-          <span>♡</span>
-        </button>
-      </div>
-    </section>
+<div class="envelope" id="env">
+  <div class="flap"></div>
+  <div class="seal"></div>
+</div>
 
-    <section class="content" id="content">
-      <div class="sparkles"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="content" id="content">
+  <div class="basmala">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</div>
+  <p>والصلاة والسلام على أشرف المرسلين</p>
+  <p>اللهم بارك لهما وبارك عليهما واجمع بينهما في الخير</p>
 
-      <h1 class="basmala">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</h1>
-      <div class="salawat">والصلاة والسلام على أشرف المرسلين</div>
+  <div class="names">فهد & إلهام</div>
 
-      <div class="blessing">
-        اللهم بارك لهما وبارك عليهما واجمع بينهما في الخير، وأغنهما بحلالك عن حرامك، وهب لهما الذرية الصالحة.
-      </div>
+  <p>الإثنين 21 ديسمبر 2026 - 20:00</p>
+</div>
 
-      <div class="body-text">
-        بعد إهدائكم عاطر التحية وأزكى السلام، تتشرف عائلتا
-        <span class="family">السيد عبد الوهاب زغدودي</span>
-        و
-        <span class="family">السيد عز الدين شراد</span>
-        بدعوتكم لحضور حفل زفاف ابنيهما
-      </div>
+<script>
+const env = document.getElementById('env');
+const content = document.getElementById('content');
 
-      <div class="names">فهد<span class="amp">&amp;</span>إلهام</div>
+let opened=false;
 
-      <div class="body-text">
-        وذلك بمشيئة الله تعالى يوم <strong>الإثنين 21 ديسمبر 2026</strong>
-        على الساعة <strong>الثامنة ليلاً</strong>
-        بقاعة الأفراح <strong>"Yani - دار بوراوي"</strong> قرطاج.
-      </div>
+env.onclick=()=>{
+ if(opened) return;
+ opened=true;
+ env.classList.add('open');
 
-      <div class="date-pill">العد التنازلي إلى ليلة العمر</div>
+ setTimeout(()=>{
+   env.style.display='none';
+   content.classList.add('show');
+ },1000);
+};
 
-      <div class="countdown">
-        <div class="time-box"><span class="time-value" id="days">00</span><span class="time-label">Days</span></div>
-        <div class="time-box"><span class="time-value" id="hours">00</span><span class="time-label">Hours</span></div>
-        <div class="time-box"><span class="time-value" id="minutes">00</span><span class="time-label">Minutes</span></div>
-        <div class="time-box"><span class="time-value" id="seconds">00</span><span class="time-label">Seconds</span></div>
-      </div>
+// petals
+for(let i=0;i<20;i++){
+ let p=document.createElement('div');
+ p.className='petal';
+ p.style.left=Math.random()*100+'%';
+ p.style.animationDuration=(5+Math.random()*5)+'s';
+ document.body.appendChild(p);
+}
+</script>
 
-      <div class="final-line">وبحضوركم تكتمل فرحتنا، وتزدان ليلتنا بمحبتكم.</div>
-      <div class="sound-note">ضع ملف الصوت داخل وسم audio ليعمل اللحن الهادئ بعد فتح الدعوة.</div>
-    </section>
-
-    <audio id="bgMusic" loop preload="metadata">
-      <!-- مثال: <source src="soft-wedding.mp3" type="audio/mpeg"> -->
-    </audio>
-  </main>
-
-  <script>
-    const envelope = document.getElementById('envelope');
-    const envelopeWrap = document.getElementById('envelopeWrap');
-    const openBtn = document.getElementById('openBtn');
-    const content = document.getElementById('content');
-    const bgMusic = document.getElementById('bgMusic');
-
-    let opened = false;
-
-    async function playMusic() {
-      try {
-        const sourceExists = bgMusic.querySelector('source') || bgMusic.getAttribute('src');
-        if (sourceExists) {
-          bgMusic.volume = 0.25;
-          await bgMusic.play();
-        }
-      } catch (err) {
-      }
-    }
-
-    async function openInvitation(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      if (opened) return;
-      opened = true;
-      envelope.classList.add('open');
-      await playMusic();
-      setTimeout(() => {
-        envelopeWrap.classList.add('hidden');
-        content.classList.add('show');
-      }, 1150);
-    }
-
-    openBtn.addEventListener('click', openInvitation);
-    envelope.addEventListener('click', openInvitation);
-    envelope.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        openInvitation(e);
-      }
-    });
-
-    const targetDate = new Date('2026-12-21T20:00:00');
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-
-    function pad(value) {
-      return String(value).padStart(2, '0');
-    }
-
-    function updateCountdown() {
-      const now = new Date();
-      const distance = targetDate - now;
-
-      if (distance <= 0) {
-        daysEl.textContent = '00';
-        hoursEl.textContent = '00';
-        minutesEl.textContent = '00';
-        secondsEl.textContent = '00';
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
-
-      daysEl.textContent = pad(days);
-      hoursEl.textContent = pad(hours);
-      minutesEl.textContent = pad(minutes);
-      secondsEl.textContent = pad(seconds);
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
 </body>
 </html>
