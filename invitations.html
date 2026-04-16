@@ -11,283 +11,155 @@
   :root {
     --gold: #C9A84C;
     --gold-light: #E8D08A;
-    --gold-shine: #F7E7B8;
+    --gold-shine: #F5E6B0;
     --gold-dark: #9A7A2E;
-    --champagne: #F8F1E6;
-    --cream: #FBF6EE;
-    --ivory: #FFFDF9;
-    --taupe-floral: #d8cdc0;
-    --taupe-floral-deep: #b8ab9b;
-    --leaf: #b7b09f;
-    --leaf-deep: #8f8878;
+    --white: #FFFDF8;
+    --white-warm: #FFF8EE;
+    --cream: #FAF3E0;
     --text-dark: #2A1F0E;
     --text-mid: #5C4A2A;
   }
-
   * { margin:0; padding:0; box-sizing:border-box; }
-
   body {
-    background:
-      radial-gradient(circle at 18% 18%, rgba(255,255,255,0.92) 0%, rgba(255,248,238,0.78) 16%, transparent 36%),
-      radial-gradient(circle at 82% 10%, rgba(255,245,235,0.75) 0%, transparent 28%),
-      linear-gradient(135deg,#F9F2E1 0%,#FFF8EE 40%,#FAF0D7 70%,#F5E8C8 100%);
+    background: linear-gradient(135deg,#F9F2E1 0%,#FFF8EE 40%,#FAF0D7 70%,#F5E8C8 100%);
     min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:flex; align-items:center; justify-content:center;
     font-family:'Amiri',serif;
-    overflow:hidden;
-    position:relative;
+    overflow:hidden; position:relative;
   }
 
-  #petals-layer, #flowers-layer, #glows-layer, #sparkles-layer, #bloom-layer {
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
+  /* ---- LAYERS ---- */
+  #petals-layer, #flowers-layer, #glows-layer, #sparkles-layer {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; overflow:hidden;
   }
-  #petals-layer { z-index:0; }
-  #flowers-layer { z-index:1; }
-  #glows-layer { z-index:2; }
+  #petals-layer   { z-index:0; }
+  #flowers-layer  { z-index:1; }
+  #glows-layer    { z-index:2; }
   #sparkles-layer { z-index:3; }
-  #bloom-layer { z-index:4; }
 
+  /* ---- PETALS ---- */
   .petal {
-    position:absolute;
-    top:-30px;
+    position:absolute; top:-30px;
     border-radius:50% 0 50% 0;
     animation:petalFall linear infinite;
   }
-  .petal:nth-child(odd){ border-radius:0 50% 0 50%; }
-  @keyframes petalFall {
-    0% { transform:translateY(0) rotate(0deg) translateX(0); opacity:0; }
-    8% { opacity:0.72; }
-    92% { opacity:0.4; }
-    100% { transform:translateY(114vh) rotate(820deg) translateX(80px); opacity:0; }
+  .petal:nth-child(odd){border-radius:0 50% 0 50%;}
+  @keyframes petalFall{
+    0%  {transform:translateY(0) rotate(0deg) translateX(0);opacity:0}
+    8%  {opacity:0.85}
+    92% {opacity:0.55}
+    100%{transform:translateY(114vh) rotate(820deg) translateX(80px);opacity:0}
   }
 
-  .wflower {
-    position:absolute;
-    top:-70px;
-    animation:flowerFall linear infinite;
-    opacity:0;
-  }
-  @keyframes flowerFall {
-    0% { transform:translateY(0) rotate(0deg); opacity:0; }
-    6% { opacity:0.75; }
-    94% { opacity:0.36; }
-    100% { transform:translateY(118vh) rotate(560deg); opacity:0; }
+  /* ---- WHITE FLOWERS ---- */
+  .wflower{position:absolute;top:-70px;animation:flowerFall linear infinite;opacity:0;}
+  @keyframes flowerFall{
+    0%  {transform:translateY(0) rotate(0deg);opacity:0}
+    6%  {opacity:0.95}
+    94% {opacity:0.55}
+    100%{transform:translateY(118vh) rotate(560deg);opacity:0}
   }
 
-  .glow-orb {
-    position:absolute;
-    border-radius:50%;
-    animation:orbPop ease-in-out infinite;
-  }
-  @keyframes orbPop {
-    0%,100% { opacity:0; transform:scale(0.8); }
-    40% { opacity:1; transform:scale(1); }
-    80% { opacity:0.45; }
+  /* ---- GLOW ORBS ---- */
+  .glow-orb{position:absolute;border-radius:50%;animation:orbPop ease-in-out infinite;}
+  @keyframes orbPop{
+    0%,100%{opacity:0;transform:scale(0.8)}
+    40%    {opacity:1;transform:scale(1)}
+    80%    {opacity:0.6}
   }
 
-  .sparkle {
-    position:absolute;
-    border-radius:50%;
-    pointer-events:none;
-    animation:sparkAnim ease-in-out infinite;
-    opacity:0;
+  /* ---- SPARKLES ---- */
+  .sparkle{
+    position:absolute;border-radius:50%;
+    pointer-events:none;animation:sparkAnim ease-in-out infinite;opacity:0;
   }
-  .sparkle.star {
+  .sparkle.star{
     border-radius:0;
     clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
   }
-  .sparkle.cross {
+  .sparkle.cross{
     border-radius:0;
     clip-path:polygon(40% 0%,60% 0%,60% 40%,100% 40%,100% 60%,60% 60%,60% 100%,40% 100%,40% 60%,0 60%,0 40%,40% 40%);
   }
-  .sparkle.diamond {
-    border-radius:0;
-    clip-path:polygon(50% 0%,100% 50%,50% 100%,0 50%);
-  }
-  @keyframes sparkAnim {
-    0%,100% { opacity:0; transform:scale(0) rotate(0deg); }
-    35% { opacity:1; transform:scale(1) rotate(30deg); }
-    65% { opacity:0.78; transform:scale(0.92) rotate(45deg); }
+  @keyframes sparkAnim{
+    0%,100%{opacity:0;transform:scale(0) rotate(0deg)}
+    35%    {opacity:1;transform:scale(1) rotate(30deg)}
+    65%    {opacity:0.85;transform:scale(0.9) rotate(45deg)}
   }
 
-  .light-ray {
-    position:fixed;
-    top:-5%;
-    background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,0.32) 45%,transparent 100%);
+  /* ---- LIGHT RAYS ---- */
+  .light-ray{
+    position:fixed;top:-5%;
+    background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,0.45) 45%,transparent 100%);
     transform-origin:top center;
     animation:rayBlink ease-in-out infinite;
-    pointer-events:none;
-    z-index:2;
-    filter:blur(2px);
+    pointer-events:none;z-index:2;filter:blur(2px);
   }
-  @keyframes rayBlink { 0%,100%{opacity:0} 50%{opacity:1} }
+  @keyframes rayBlink{0%,100%{opacity:0}50%{opacity:1}}
 
-  .ambient-bloom {
-    position:absolute;
-    opacity:0.12;
-    filter:blur(0.15px) drop-shadow(0 0 12px rgba(255,255,255,0.38));
-    animation:bloomFloat ease-in-out infinite;
-    transform-origin:center;
-  }
-  @keyframes bloomFloat {
-    0%,100% { transform:translateY(0) scale(1) rotate(0deg); opacity:0.08; }
-    50% { transform:translateY(-10px) scale(1.02) rotate(2deg); opacity:0.14; }
-  }
-
-  #envelope-scene {
-    position:relative;
-    z-index:10;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100vh;
+  /* ---- ENVELOPE SCENE ---- */
+  #envelope-scene{
+    position:relative;z-index:10;
+    display:flex;align-items:center;justify-content:center;
+    width:100%;height:100vh;
     perspective:1400px;
     transition:opacity 0.55s;
   }
-
-  .envelope {
+  .envelope{
     position:relative;
-    width:min(560px,93vw);
+    width:min(520px,92vw);
     transform-style:preserve-3d;
     transition:transform 0.3s ease;
   }
-  .envelope:hover { transform:scale(1.015) translateY(-4px); }
+  .envelope:hover{transform:scale(1.02) translateY(-5px);}
 
-  .envelope-halo {
-    position:absolute;
-    inset:-65px;
-    background:
-      radial-gradient(circle at 50% 50%, rgba(255,246,218,0.18) 0%, rgba(255,245,180,0.05) 35%, transparent 65%),
-      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.28) 0%, transparent 45%),
-      radial-gradient(circle at 80% 70%, rgba(255,238,222,0.12) 0%, transparent 40%);
-    filter:blur(20px);
-    pointer-events:none;
-  }
-
-  .env-body {
-    background:linear-gradient(160deg,#FFFDF7 0%,#F9F1DF 56%,#F2E3C4 100%);
+  /* Envelope body */
+  .env-body{
+    background:linear-gradient(160deg,#FFFDF5 0%,#FAF3DC 60%,#F0E4C0 100%);
     border:1px solid var(--gold);
-    border-radius:6px 6px 18px 18px;
+    border-radius:4px 4px 14px 14px;
     position:relative;
     box-shadow:
-      0 24px 70px rgba(180,140,60,0.22),
-      0 8px 24px rgba(140,100,30,0.13),
-      inset 0 0 0 1px rgba(255,255,255,0.82),
-      0 0 0 1px rgba(255,240,190,0.28);
+      0 24px 70px rgba(180,140,60,0.28),
+      0 8px 24px rgba(140,100,30,0.18),
+      inset 0 0 0 1px rgba(255,255,255,0.7);
     overflow:visible;
   }
-  .env-body::before {
-    content:'';
-    position:absolute;
-    inset:7px;
-    border:1px solid rgba(201,168,76,0.32);
-    border-radius:3px 3px 12px 12px;
-    pointer-events:none;
-    z-index:1;
-  }
-  .env-body::after {
-    content:'';
-    position:absolute;
-    inset:16px 16px 20px;
-    border-radius:4px 4px 12px 12px;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(255,255,255,0.32), transparent 38%),
-      linear-gradient(180deg, rgba(255,255,255,0.12), transparent 35%);
-    pointer-events:none;
-    z-index:1;
+  .env-body::before{
+    content:'';position:absolute;inset:6px;
+    border:1px solid rgba(201,168,76,0.4);
+    border-radius:2px 2px 10px 10px;
+    pointer-events:none;z-index:1;
   }
 
-  .floral-frame, .card-floral-frame {
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:2;
-  }
-
-  .floral-spray {
-    position:absolute;
-    width:138px;
-    opacity:0.88;
-    filter:drop-shadow(0 2px 8px rgba(180,140,70,0.08));
-  }
-  .floral-spray svg { width:100%; height:auto; display:block; }
-  .floral-spray.tl { top:-14px; left:-18px; }
-  .floral-spray.tr { top:-14px; right:-18px; transform:scaleX(-1) rotate(2deg); }
-  .floral-spray.bl { bottom:-16px; left:-18px; transform:scaleY(-1) rotate(-1deg); }
-  .floral-spray.br { bottom:-16px; right:-18px; transform:scale(-1) rotate(1deg); }
-  .floral-spray.mid-left { top:33%; left:-28px; width:102px; transform:rotate(-12deg); opacity:0.68; }
-  .floral-spray.mid-right { top:33%; right:-28px; width:102px; transform:scaleX(-1) rotate(-12deg); opacity:0.68; }
-
-  .env-top-wreath, .env-bottom-wreath {
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(230px,64%);
-    opacity:0.64;
-    z-index:2;
-    pointer-events:none;
-  }
-  .env-top-wreath { top:12px; }
-  .env-bottom-wreath { bottom:14px; transform:translateX(-50%) scaleY(-1); opacity:0.46; }
-  .env-top-wreath svg, .env-bottom-wreath svg { width:100%; height:auto; display:block; }
-
-  .flap-wrap {
+  /* Flap wrapper — preserves 3D for the fold */
+  .flap-wrap{
     position:relative;
-    width:100%;
-    height:0;
-    padding-bottom:48%;
+    width:100%;height:0;padding-bottom:48%;
     transform-style:preserve-3d;
     perspective:900px;
   }
 
-  .env-flap {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+  /* Triangle flap */
+  .env-flap{
+    position:absolute;top:0;left:0;
+    width:100%;height:100%;
     clip-path:polygon(0 0,100% 0,50% 96%);
-    background:
-      linear-gradient(170deg,#FFFDF5 0%,#F5E8BF 52%,#E9D698 100%),
-      radial-gradient(circle at 50% 18%, rgba(255,255,255,0.44) 0%, transparent 42%);
-    border-bottom:1px solid rgba(201,168,76,0.2);
+    background:linear-gradient(170deg,#FFFDF5 0%,#EDD99A 100%);
+    border-bottom:1px solid rgba(201,168,76,0.25);
     transform-origin:top center;
     transform:rotateX(0deg);
     transition:transform 1s cubic-bezier(0.4,0,0.2,1);
     z-index:6;
-    box-shadow:0 5px 18px rgba(180,140,60,0.15);
-    overflow:hidden;
+    box-shadow:0 5px 18px rgba(180,140,60,0.18);
   }
-  .env-flap.open { transform:rotateX(-180deg); }
+  .env-flap.open{transform:rotateX(-180deg);}
 
-  .flap-floral {
+  /* ---- OPEN BUTTON — positioned on the triangle ---- */
+  .open-btn{
     position:absolute;
-    inset:0;
-    z-index:7;
-    pointer-events:none;
-    opacity:0.66;
-    mix-blend-mode:multiply;
-  }
-
-  .flap-shine {
-    position:absolute;
-    inset:0;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(255,255,255,0.56), transparent 36%),
-      linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.06) 20%, transparent 55%);
-    z-index:8;
-    pointer-events:none;
-    mix-blend-mode:screen;
-  }
-
-  .open-btn {
-    position:absolute;
+    /* lower third of the triangle area */
     bottom:14%;
     left:50%;
     transform:translateX(-50%);
@@ -304,462 +176,242 @@
     white-space:nowrap;
     direction:rtl;
     box-shadow:
-      0 4px 18px rgba(154,110,26,0.38),
-      0 0 18px rgba(255,230,80,0.18),
-      inset 0 1px 0 rgba(255,255,255,0.42);
+      0 4px 18px rgba(154,110,26,0.45),
+      0 0 24px rgba(255,230,80,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.45);
     animation:btnGlow 2.4s ease-in-out infinite;
     pointer-events:all;
     transition:all 0.2s;
   }
-  .open-btn:hover {
-    transform:translateX(-50%) scale(1.06);
-    box-shadow:0 6px 24px rgba(154,110,26,0.48),0 0 28px rgba(255,230,80,0.34);
+  .open-btn:hover{
+    transform:translateX(-50%) scale(1.08);
+    box-shadow:0 6px 26px rgba(154,110,26,0.6),0 0 36px rgba(255,230,80,0.5);
   }
-  .open-btn.hidden { opacity:0; pointer-events:none; transition:opacity 0.35s; }
-  @keyframes btnGlow {
-    0%,100% { box-shadow:0 4px 18px rgba(154,110,26,0.34),0 0 14px rgba(255,230,80,0.16); }
-    50% { box-shadow:0 4px 22px rgba(154,110,26,0.46),0 0 24px rgba(255,230,80,0.3); }
+  .open-btn.hidden{opacity:0;pointer-events:none;transition:opacity 0.35s;}
+  @keyframes btnGlow{
+    0%,100%{box-shadow:0 4px 18px rgba(154,110,26,0.4),0 0 18px rgba(255,230,80,0.22)}
+    50%    {box-shadow:0 4px 22px rgba(154,110,26,0.6),0 0 34px rgba(255,230,80,0.50)}
   }
 
-  .seal {
-    position:absolute;
-    bottom:-30px;
-    left:50%;
+  /* Wax seal */
+  .seal{
+    position:absolute;bottom:-28px;left:50%;
     transform:translateX(-50%);
-    width:62px;
-    height:62px;
+    width:58px;height:58px;
     background:radial-gradient(circle at 35% 35%,#D4A843,#9A6E1A);
     border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:flex;align-items:center;justify-content:center;
     z-index:10;
-    box-shadow:0 4px 16px rgba(154,110,26,0.42), inset 0 1px 3px rgba(255,220,100,0.36), 0 0 16px rgba(255,230,140,0.18);
+    box-shadow:0 4px 16px rgba(154,110,26,0.5),inset 0 1px 3px rgba(255,220,100,0.4);
     transition:transform 0.5s,opacity 0.5s;
   }
-  .seal::before {
-    content:'';
-    position:absolute;
-    inset:7px;
-    border-radius:50%;
-    border:1px solid rgba(255,240,180,0.32);
-  }
-  .seal-text {
-    color:#FFF8DC;
-    font-family:'Great Vibes',cursive;
-    font-size:13px;
-    text-align:center;
-    line-height:1;
-    text-shadow:0 1px 2px rgba(0,0,0,0.26);
-    user-select:none;
+  .seal-text{
+    color:#FFF8DC;font-family:'Great Vibes',cursive;
+    font-size:13px;text-align:center;line-height:1;
+    text-shadow:0 1px 2px rgba(0,0,0,0.3);user-select:none;
   }
 
-  .env-content-preview {
-    position:relative;
-    padding:58px 34px 46px;
-    text-align:center;
-    min-height:230px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    z-index:3;
+  /* Envelope content preview */
+  .env-content-preview{
+    padding:48px 30px 36px;text-align:center;min-height:200px;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
   }
-  .env-content-preview::before {
-    content:'';
-    position:absolute;
-    inset:22px;
-    border-radius:8px;
-    border:1px solid rgba(201,168,76,0.1);
-    pointer-events:none;
-  }
-  .env-to {
+  .env-to{
     font-family:'Cinzel Decorative',serif;
     font-size:clamp(16px,3.8vw,26px);
-    color:var(--gold-dark);
-    letter-spacing:3px;
-    direction:ltr;
-    text-shadow:0 1px 0 rgba(255,255,255,0.84), 0 0 14px rgba(255,230,120,0.08);
+    color:var(--gold-dark);letter-spacing:3px;direction:ltr;
   }
-  .env-subtitle {
-    font-family:'Amiri',serif;
-    font-size:clamp(12px,2.5vw,15px);
-    color:var(--text-mid);
-    direction:rtl;
-    letter-spacing:1px;
-  }
-  .env-divider {
-    width:72%;
-    height:1px;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
-    margin:4px auto;
-  }
-  .env-ornament { font-size:20px; color:var(--gold); line-height:1; }
-  .env-mini-flowers {
-    display:flex;
-    gap:14px;
-    align-items:center;
-    justify-content:center;
-    margin-top:4px;
-    opacity:0.72;
-  }
-  .env-mini-flowers svg { width:26px; height:26px; }
+  .env-subtitle{font-family:'Amiri',serif;font-size:clamp(12px,2.5vw,15px);color:var(--text-mid);direction:rtl;letter-spacing:1px;}
+  .env-divider{width:70%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:4px auto;}
+  .env-ornament{font-size:20px;color:var(--gold);line-height:1;}
 
-  .local-sparkles, .card-sparkles {
-    position:absolute;
-    inset:-18px;
-    pointer-events:none;
-    z-index:11;
-  }
-  .local-spark, .card-local-spark {
-    position:absolute;
-    border-radius:50%;
-    animation:sceneTwinkle ease-in-out infinite;
-  }
-  @keyframes sceneTwinkle {
-    0%,100% { opacity:0.04; transform:scale(0.5) rotate(0deg); }
-    50% { opacity:0.7; transform:scale(1.05) rotate(20deg); }
-  }
-
-  #invitation-card {
-    position:fixed;
-    inset:0;
-    z-index:100;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    overflow-y:auto;
-    overflow-x:hidden;
-    background:rgba(240,228,195,0.1);
-    backdrop-filter:blur(3px);
-    opacity:0;
-    pointer-events:none;
+  /* ---- INVITATION CARD ---- */
+  #invitation-card{
+    position:fixed;inset:0;z-index:100;
+    display:flex;align-items:flex-start;justify-content:center;
+    overflow-y:auto;overflow-x:hidden;
+    background:rgba(240,228,195,0.1);backdrop-filter:blur(3px);
+    opacity:0;pointer-events:none;
     transition:opacity 0.7s ease;
     padding:20px 10px;
   }
-  #invitation-card.visible { opacity:1; pointer-events:all; }
+  #invitation-card.visible{opacity:1;pointer-events:all;}
 
-  .card-inner {
-    background:
-      linear-gradient(160deg,#FFFEFA 0%,#FFF9EF 48%,#FFF4DE 100%),
-      radial-gradient(circle at 50% 0%, rgba(255,255,255,0.35), transparent 30%);
+  .card-inner{
+    background:linear-gradient(160deg,#FFFEF9 0%,#FFFAED 50%,#FFF4DA 100%);
     border:1px solid var(--gold);
-    border-radius:10px;
-    width:min(730px,96vw);
+    border-radius:8px;
+    width:min(700px,96vw);
     position:relative;
     box-shadow:
-      0 30px 90px rgba(180,140,50,0.25),
-      0 10px 30px rgba(140,100,20,0.14),
-      0 0 70px rgba(255,240,120,0.05),
-      inset 0 0 0 8px rgba(255,255,255,0.58),
-      inset 0 0 0 9px rgba(201,168,76,0.17);
+      0 30px 90px rgba(180,140,50,0.32),
+      0 10px 30px rgba(140,100,20,0.2),
+      0 0 90px rgba(255,240,120,0.08),
+      inset 0 0 0 8px rgba(255,255,255,0.55),
+      inset 0 0 0 9px rgba(201,168,76,0.2);
     overflow:hidden;
     transform:translateY(30px) scale(0.96);
     transition:transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
     margin:auto;
   }
-  #invitation-card.visible .card-inner { transform:translateY(0) scale(1); }
+  #invitation-card.visible .card-inner{transform:translateY(0) scale(1);}
 
-  .card-inner::after {
-    content:'';
-    position:absolute;
-    inset:0;
+  /* Inner radial glow overlay */
+  .card-inner::after{
+    content:'';position:absolute;inset:0;
     background:
-      radial-gradient(ellipse at 50% 5%,rgba(255,255,255,0.18) 0%,transparent 55%),
-      radial-gradient(ellipse at 50% 95%,rgba(255,240,150,0.05) 0%,transparent 55%);
-    pointer-events:none;
-    z-index:0;
+      radial-gradient(ellipse at 50% 5%,rgba(255,255,255,0.22) 0%,transparent 55%),
+      radial-gradient(ellipse at 50% 95%,rgba(255,240,150,0.07) 0%,transparent 55%);
+    pointer-events:none;z-index:0;
   }
 
-  .inner-ornate-border {
-    position:absolute;
-    inset:18px;
-    border:1px solid rgba(201,168,76,0.2);
-    border-radius:18px;
-    pointer-events:none;
-    z-index:1;
-  }
-  .inner-ornate-border::before,
-  .inner-ornate-border::after {
-    content:'';
-    position:absolute;
-    inset:10px;
-    border:1px solid rgba(201,168,76,0.1);
-    border-radius:14px;
+  /* Corners */
+  .corner{position:absolute;width:90px;height:90px;pointer-events:none;z-index:2;}
+  .corner-tl{top:8px;left:8px;}
+  .corner-tr{top:8px;right:8px;transform:scaleX(-1);}
+  .corner-bl{bottom:8px;left:8px;transform:scaleY(-1);}
+  .corner-br{bottom:8px;right:8px;transform:scale(-1);}
+
+  .card-body{
+    padding:clamp(32px,6vw,64px) clamp(24px,6vw,60px);
+    text-align:center;direction:rtl;
+    position:relative;z-index:1;
   }
 
-  .top-floral-crown, .bottom-floral-crown {
-    width:min(330px,72%);
-    margin:0 auto 16px;
-    opacity:0.76;
-  }
-  .bottom-floral-crown {
-    margin:18px auto 10px;
-    transform:scaleY(-1);
-    opacity:0.72;
-  }
-  .top-floral-crown svg, .bottom-floral-crown svg { width:100%; height:auto; display:block; }
-
-  .corner { position:absolute; width:90px; height:90px; pointer-events:none; z-index:3; }
-  .corner-tl { top:8px; left:8px; }
-  .corner-tr { top:8px; right:8px; transform:scaleX(-1); }
-  .corner-bl { bottom:8px; left:8px; transform:scaleY(-1); }
-  .corner-br { bottom:8px; right:8px; transform:scale(-1); }
-
-  .card-body {
-    padding:clamp(38px,6vw,68px) clamp(24px,6vw,60px);
-    text-align:center;
-    direction:rtl;
-    position:relative;
-    z-index:2;
-  }
-
-  .bismillah {
+  /* Bismillah */
+  .bismillah{
     font-family:'Scheherazade New',serif;
-    font-size:clamp(26px,6vw,48px);
-    font-weight:700;
+    font-size:clamp(26px,6vw,48px);font-weight:700;
     background:linear-gradient(135deg,#7A5C18,#C9A84C,#F5E680,#E8D08A,#C9A84C,#8A6820);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    filter:drop-shadow(0 2px 6px rgba(180,140,50,0.18));
-    line-height:1.5;
-    margin-bottom:4px;
-    letter-spacing:2px;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    filter:drop-shadow(0 2px 6px rgba(180,140,50,0.22));
+    line-height:1.5;margin-bottom:4px;letter-spacing:2px;
   }
-  .salat {
+  .salat{
     font-family:'Scheherazade New',serif;
     font-size:clamp(13px,2.8vw,19px);
-    color:var(--text-mid);
-    margin-bottom:16px;
-    line-height:1.9;
+    color:var(--text-mid);margin-bottom:16px;line-height:1.9;
   }
 
-  .gold-line {
-    width:100%;
-    height:1px;
-    background:linear-gradient(90deg,transparent 0%,rgba(201,168,76,0.42) 12%,var(--gold-light) 24%,var(--gold) 50%,var(--gold-light) 76%,rgba(201,168,76,0.42) 88%,transparent 100%);
-    margin:14px 0;
-    position:relative;
+  .gold-line{
+    width:100%;height:1px;
+    background:linear-gradient(90deg,transparent 0%,var(--gold-light) 20%,var(--gold) 50%,var(--gold-light) 80%,transparent 100%);
+    margin:14px 0;position:relative;
   }
-  .gold-line::before {
-    content:'✦';
-    position:absolute;
-    left:50%;
-    top:50%;
+  .gold-line::before{
+    content:'✦';position:absolute;left:50%;top:50%;
     transform:translate(-50%,-50%);
-    color:var(--gold);
-    font-size:12px;
-    background:linear-gradient(160deg,#FFFEF9,#FFF4DA);
-    padding:0 8px;
+    color:var(--gold);font-size:12px;
+    background:linear-gradient(160deg,#FFFEF9,#FFF4DA);padding:0 8px;
   }
 
-  .mini-floral-divider {
-    width:155px;
-    margin:12px auto 4px;
-    opacity:0.75;
-  }
-  .mini-floral-divider svg { width:100%; height:auto; display:block; }
+  .dua{font-family:'Amiri',serif;font-size:clamp(13px,2.5vw,16px);color:var(--text-mid);line-height:2.1;margin:10px 0;}
+  .greeting{font-family:'Amiri',serif;font-size:clamp(13px,2.8vw,17px);color:var(--text-dark);line-height:1.9;margin:10px 0;}
+  .family-names{font-family:'Scheherazade New',serif;font-size:clamp(14px,3vw,20px);color:var(--text-dark);font-weight:700;line-height:2;margin:12px 0;}
 
-  .dua { font-family:'Amiri',serif; font-size:clamp(13px,2.5vw,16px); color:var(--text-mid); line-height:2.1; margin:10px 0; }
-  .greeting { font-family:'Amiri',serif; font-size:clamp(13px,2.8vw,17px); color:var(--text-dark); line-height:1.9; margin:10px 0; }
-  .family-names { font-family:'Scheherazade New',serif; font-size:clamp(14px,3vw,20px); color:var(--text-dark); font-weight:700; line-height:2; margin:12px 0; }
-
-  .couple-names-ar {
-    font-family:'Scheherazade New',serif;
-    font-weight:700;
-    font-size:clamp(34px,9vw,72px);
-    line-height:1.15;
+  /* ---- COUPLE NAMES — luxury fonts ---- */
+  .couple-names-ar{
+    font-family:'Scheherazade New',serif;font-weight:700;
+    font-size:clamp(34px,9vw,72px);line-height:1.15;
     margin:20px 0 4px;
     background:linear-gradient(135deg,#7A5C18,#C9A84C,#F5E680,#C9A84C,#7A5C18);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    filter:drop-shadow(0 3px 10px rgba(180,140,50,0.28));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    filter:drop-shadow(0 3px 10px rgba(180,140,50,0.35));
     letter-spacing:5px;
   }
-  .couple-names-en {
-    font-family:'Tangerine',cursive;
-    font-weight:700;
+  .couple-names-en{
+    font-family:'Tangerine',cursive;font-weight:700;
     font-size:clamp(56px,15vw,118px);
-    color:var(--gold-dark);
-    letter-spacing:4px;
-    margin:-4px 0 6px;
-    direction:ltr;
-    line-height:1;
-    text-shadow:0 2px 14px rgba(180,140,50,0.22),0 0 38px rgba(255,230,100,0.09);
+    color:var(--gold-dark);letter-spacing:4px;
+    margin:-4px 0 6px;direction:ltr;line-height:1;
+    text-shadow:0 2px 18px rgba(180,140,50,0.3),0 0 50px rgba(255,230,100,0.14);
   }
 
-  .mashiallah { font-family:'Amiri',serif; font-size:clamp(13px,2.8vw,17px); color:var(--text-mid); line-height:1.9; margin:8px 0 16px; }
+  .mashiallah{font-family:'Amiri',serif;font-size:clamp(13px,2.8vw,17px);color:var(--text-mid);line-height:1.9;margin:8px 0 16px;}
 
-  .event-details {
-    background:rgba(255,252,235,0.66);
-    border:1px solid rgba(201,168,76,0.32);
-    border-radius:8px;
-    padding:clamp(14px,3vw,26px) clamp(16px,4vw,34px);
-    margin:16px 0;
-    position:relative;
-    overflow:hidden;
-  }
-  .event-details::before {
-    content:'';
-    position:absolute;
-    inset:4px;
-    border:1px solid rgba(201,168,76,0.13);
+  .event-details{
+    background:rgba(255,252,235,0.6);
+    border:1px solid rgba(201,168,76,0.35);
     border-radius:6px;
-    pointer-events:none;
+    padding:clamp(14px,3vw,26px) clamp(16px,4vw,34px);
+    margin:16px 0;position:relative;
   }
-  .event-details::after {
-    content:'';
-    position:absolute;
-    inset:0;
-    background:
-      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.22), transparent 28%),
-      radial-gradient(circle at 85% 80%, rgba(255,235,170,0.08), transparent 30%);
-    pointer-events:none;
-  }
+  .event-details::before{content:'';position:absolute;inset:4px;border:1px solid rgba(201,168,76,0.15);border-radius:4px;pointer-events:none;}
 
-  .event-date { font-family:'Scheherazade New',serif; font-size:clamp(16px,4vw,26px); color:var(--gold-dark); font-weight:700; line-height:1.8; }
-  .event-time { font-family:'Amiri',serif; font-size:clamp(13px,2.8vw,17px); color:var(--text-dark); line-height:1.9; }
-  .venue { font-family:'Scheherazade New',serif; font-size:clamp(15px,3.5vw,22px); color:var(--text-dark); font-weight:700; direction:rtl; line-height:1.8; }
-  .venue-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(14px,3vw,20px); color:var(--gold-dark); direction:ltr; }
+  .event-date{font-family:'Scheherazade New',serif;font-size:clamp(16px,4vw,26px);color:var(--gold-dark);font-weight:700;line-height:1.8;}
+  .event-time{font-family:'Amiri',serif;font-size:clamp(13px,2.8vw,17px);color:var(--text-dark);line-height:1.9;}
+  .venue{font-family:'Scheherazade New',serif;font-size:clamp(15px,3.5vw,22px);color:var(--text-dark);font-weight:700;direction:rtl;line-height:1.8;}
+  .venue-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,3vw,20px);color:var(--gold-dark);direction:ltr;}
 
-  .countdown-section { margin:24px 0 10px; direction:ltr; }
-  .countdown-label { font-family:'Amiri',serif; font-size:clamp(12px,2.5vw,15px); color:var(--text-mid); margin-bottom:14px; direction:rtl; letter-spacing:1px; }
-  .countdown-grid { display:flex; justify-content:center; gap:clamp(8px,2vw,20px); flex-wrap:wrap; }
-  .countdown-box {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+  /* Countdown */
+  .countdown-section{margin:24px 0 10px;direction:ltr;}
+  .countdown-label{font-family:'Amiri',serif;font-size:clamp(12px,2.5vw,15px);color:var(--text-mid);margin-bottom:14px;direction:rtl;letter-spacing:1px;}
+  .countdown-grid{display:flex;justify-content:center;gap:clamp(8px,2vw,20px);flex-wrap:wrap;}
+  .countdown-box{
+    display:flex;flex-direction:column;align-items:center;
     background:linear-gradient(160deg,rgba(255,255,255,0.92),rgba(255,248,220,0.7));
-    border:1px solid var(--gold);
-    border-radius:8px;
+    border:1px solid var(--gold);border-radius:6px;
     padding:clamp(10px,2vw,18px) clamp(12px,2.5vw,24px);
     min-width:clamp(62px,14vw,92px);
-    box-shadow:0 4px 18px rgba(180,140,50,0.12),inset 0 1px 0 rgba(255,255,255,0.8),0 0 16px rgba(255,230,100,0.05);
-    position:relative;
-    overflow:hidden;
+    box-shadow:0 4px 18px rgba(180,140,50,0.16),inset 0 1px 0 rgba(255,255,255,0.8),0 0 22px rgba(255,230,100,0.07);
+    position:relative;overflow:hidden;
   }
-  .countdown-box::before {
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:2px;
-    background:linear-gradient(90deg,var(--gold-dark),var(--gold-shine),var(--gold-dark));
-  }
-  .countdown-box::after {
-    content:'';
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.3), transparent 36%);
-    pointer-events:none;
-  }
-  .countdown-num { font-family:'Cinzel Decorative',serif; font-size:clamp(24px,5.5vw,44px); color:var(--gold-dark); line-height:1; }
-  .countdown-unit { font-family:'Amiri',serif; font-size:clamp(9px,2vw,12px); color:var(--text-mid); margin-top:5px; letter-spacing:1px; direction:rtl; }
+  .countdown-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-shine),var(--gold-dark));}
+  .countdown-num{font-family:'Cinzel Decorative',serif;font-size:clamp(24px,5.5vw,44px);color:var(--gold-dark);line-height:1;}
+  .countdown-unit{font-family:'Amiri',serif;font-size:clamp(9px,2vw,12px);color:var(--text-mid);margin-top:5px;letter-spacing:1px;direction:rtl;}
 
-  .romantic-msg { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(14px,3vw,20px); color:var(--gold-dark); direction:ltr; text-align:center; line-height:1.9; margin:16px 0; opacity:0.88; }
+  .romantic-msg{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,3vw,20px);color:var(--gold-dark);direction:ltr;text-align:center;line-height:1.9;margin:16px 0;opacity:0.9;}
 
-  .card-footer { text-align:center; padding-bottom:10px; font-family:'Tangerine',cursive; font-weight:700; font-size:clamp(24px,5vw,40px); color:var(--gold); direction:ltr; letter-spacing:2px; }
-  .floral-bottom { width:100%; text-align:center; color:var(--gold); font-size:20px; letter-spacing:4px; margin:6px 0; opacity:0.7; }
+  .card-footer{text-align:center;padding-bottom:10px;font-family:'Tangerine',cursive;font-weight:700;font-size:clamp(24px,5vw,40px);color:var(--gold);direction:ltr;letter-spacing:2px;}
+  .floral-bottom{width:100%;text-align:center;color:var(--gold);font-size:20px;letter-spacing:4px;margin:6px 0;opacity:0.7;}
 
-  .close-card {
-    position:fixed;
-    top:16px;
-    left:16px;
-    z-index:200;
-    background:rgba(255,248,220,0.93);
-    border:1px solid var(--gold);
-    color:var(--gold-dark);
-    font-family:'Amiri',serif;
-    font-size:13px;
-    padding:8px 18px;
-    border-radius:30px;
-    cursor:pointer;
-    backdrop-filter:blur(8px);
-    box-shadow:0 4px 14px rgba(180,140,50,0.18);
-    display:none;
-    transition:all 0.2s;
-    direction:rtl;
+  /* Close button */
+  .close-card{
+    position:fixed;top:16px;left:16px;z-index:200;
+    background:rgba(255,248,220,0.93);border:1px solid var(--gold);
+    color:var(--gold-dark);font-family:'Amiri',serif;font-size:13px;
+    padding:8px 18px;border-radius:30px;cursor:pointer;
+    backdrop-filter:blur(8px);box-shadow:0 4px 14px rgba(180,140,50,0.22);
+    display:none;transition:all 0.2s;direction:rtl;
   }
-  .close-card:hover { background:var(--gold); color:white; }
-  .close-card.visible { display:block; }
+  .close-card:hover{background:var(--gold);color:white;}
+  .close-card.visible{display:block;}
 
-  .sound-btn {
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    z-index:300;
-    background:rgba(255,248,220,0.93);
-    border:1px solid var(--gold);
-    color:var(--gold-dark);
-    font-size:20px;
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 4px 14px rgba(180,140,50,0.18);
-    transition:all 0.2s;
+  .sound-btn{
+    position:fixed;bottom:20px;right:20px;z-index:300;
+    background:rgba(255,248,220,0.93);border:1px solid var(--gold);
+    color:var(--gold-dark);font-size:20px;width:44px;height:44px;
+    border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(180,140,50,0.22);transition:all 0.2s;
   }
-  .sound-btn:hover { background:var(--gold); color:white; }
-
-  @media(max-width:640px){
-    .floral-spray { width:100px; }
-    .floral-spray.mid-left, .floral-spray.mid-right { width:74px; top:37%; }
-    .env-content-preview { padding:50px 22px 40px; }
-    .top-floral-crown, .bottom-floral-crown { width:min(270px,80%); }
-    .inner-ornate-border { inset:12px; }
-  }
+  .sound-btn:hover{background:var(--gold);color:white;}
 
   @media(max-width:480px){
-    .card-body { padding:30px 16px; }
-    .bismillah { font-size:26px; }
-    .couple-names-ar { font-size:36px; }
-    .couple-names-en { font-size:66px; }
-    .open-btn { padding:8px 20px; font-size:12px; }
-    .floral-spray { width:84px; }
-    .env-top-wreath, .env-bottom-wreath { width:min(190px,60%); }
+    .card-body{padding:24px 16px;}
+    .bismillah{font-size:26px;}
+    .couple-names-ar{font-size:36px;}
+    .couple-names-en{font-size:66px;}
   }
 </style>
 </head>
 <body>
 
+<!-- Particle layers -->
 <div id="petals-layer"></div>
 <div id="flowers-layer"></div>
 <div id="glows-layer"></div>
 <div id="sparkles-layer"></div>
-<div id="bloom-layer"></div>
 
 <button class="sound-btn" id="soundBtn">🔇</button>
 
+<!-- ====== ENVELOPE ====== -->
 <div id="envelope-scene">
   <div class="envelope" id="envelope">
-    <div class="envelope-halo"></div>
-    <div class="local-sparkles" id="envelopeSparkles"></div>
-
     <div class="env-body">
-      <div class="floral-frame">
-        <div class="floral-spray tl floral-holder"></div>
-        <div class="floral-spray tr floral-holder"></div>
-        <div class="floral-spray bl floral-holder"></div>
-        <div class="floral-spray br floral-holder"></div>
-        <div class="floral-spray mid-left floral-holder"></div>
-        <div class="floral-spray mid-right floral-holder"></div>
-      </div>
-
-      <div class="env-top-wreath" id="envTopWreath"></div>
-      <div class="env-bottom-wreath" id="envBottomWreath"></div>
 
       <div class="flap-wrap">
-        <div class="env-flap" id="envFlap">
-          <div class="flap-floral" id="flapFloral"></div>
-          <div class="flap-shine"></div>
-        </div>
+        <div class="env-flap" id="envFlap"></div>
+        <!-- Open button lives on top of the triangle -->
         <button class="open-btn" id="openBtn" onclick="openEnvelope()">✉ &nbsp; افتح الدعوة</button>
       </div>
 
@@ -774,7 +426,6 @@
         <div class="env-divider"></div>
         <div class="env-subtitle">دعوة زفاف</div>
         <div class="env-subtitle">21 ديسمبر 2026</div>
-        <div class="env-mini-flowers" id="envMiniFlowers"></div>
         <div class="env-ornament" style="margin-top:6px;">✦ ✦ ✦</div>
       </div>
     </div>
@@ -783,20 +434,10 @@
 
 <button class="close-card" id="closeCard">✕ إغلاق</button>
 
+<!-- ====== INVITATION CARD ====== -->
 <div id="invitation-card">
   <div class="card-inner">
-    <div class="card-sparkles" id="cardSparkles"></div>
-    <div class="inner-ornate-border"></div>
-
-    <div class="card-floral-frame">
-      <div class="floral-spray tl floral-holder"></div>
-      <div class="floral-spray tr floral-holder"></div>
-      <div class="floral-spray bl floral-holder"></div>
-      <div class="floral-spray br floral-holder"></div>
-      <div class="floral-spray mid-left floral-holder"></div>
-      <div class="floral-spray mid-right floral-holder"></div>
-    </div>
-
+    <!-- Corner ornaments -->
     <svg class="corner corner-tl" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M5,5 L5,52 Q5,5 52,5 Z" stroke="#C9A84C" stroke-width="0.8" fill="rgba(201,168,76,0.07)"/>
       <path d="M5,5 L44,5 Q5,5 5,44 Z" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
@@ -829,7 +470,6 @@
     </svg>
 
     <div class="card-body">
-      <div class="top-floral-crown" id="topFloralCrown"></div>
 
       <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
       <div class="salat">وَالصَّلَاةُ وَالسَّلَامُ عَلَى أَشْرَفِ الْمُرْسَلِينَ</div>
@@ -847,7 +487,6 @@
 
       <div class="greeting">بَعْدَ إِهْدَائِكُمْ عَاطِرَ التَّحِيَّةِ وَأَزْكَى السَّلَامِ</div>
 
-      <div class="mini-floral-divider" id="miniDivider1"></div>
       <div class="gold-line"></div>
 
       <div class="family-names">
@@ -862,7 +501,6 @@
       <div class="couple-names-ar">فَهْد &amp; إِلْهَام</div>
       <div class="couple-names-en">Fahd &amp; Elhem</div>
 
-      <div class="mini-floral-divider" id="miniDivider2"></div>
       <div class="gold-line"></div>
 
       <div class="mashiallah">وَذَلِكَ بِمَشِيئَةِ اللَّهِ تَعَالَى</div>
@@ -898,10 +536,10 @@
       </div>
 
       <div class="gold-line"></div>
-      <div class="bottom-floral-crown" id="bottomFloralCrown"></div>
 
       <div class="card-footer">Fahd &amp; Elhem — 21 · 12 · 2026</div>
       <div class="floral-bottom">❧ ✦ ❧</div>
+
     </div>
   </div>
 </div>
@@ -909,205 +547,19 @@
 <audio id="weddingAudio" loop preload="none"></audio>
 
 <script>
-function roseClusterSVG(size = 120) {
-  const flowers = [
-    "https://pngimg.com/uploads/rose/rose_PNG664.png",
-    "https://pngimg.com/uploads/rose/rose_PNG665.png",
-    "https://pngimg.com/uploads/rose/rose_PNG668.png"
-  ];
-  const img = flowers[Math.floor(Math.random()*flowers.length)];
-  return `<img src="${img}" style="width:${size}px;opacity:0.95;filter:drop-shadow(0 10px 18px rgba(0,0,0,0.18));"/>`;
-}
-
-function delicateSpraySVG(size = 150) {
-  return `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="${size}" height="${size}">
-    <g fill="none" stroke="rgba(201,168,76,0.22)" stroke-width="1.1" stroke-linecap="round">
-      <path d="M28 204 C50 172, 62 143, 78 111 C96 77, 132 50, 190 28"/>
-      <path d="M44 189 C67 165, 89 145, 112 115"/>
-      <path d="M72 146 C95 139, 119 127, 138 104"/>
-      <path d="M82 96 C102 98, 122 90, 142 70"/>
-      <path d="M118 176 C146 162, 167 142, 184 114"/>
-    </g>
-    <g fill="rgba(156,177,142,0.9)">
-      <ellipse cx="74" cy="110" rx="10" ry="19" transform="rotate(-42 74 110)"/>
-      <ellipse cx="98" cy="87" rx="8" ry="17" transform="rotate(-8 98 87)"/>
-      <ellipse cx="124" cy="66" rx="8" ry="18" transform="rotate(26 124 66)"/>
-      <ellipse cx="117" cy="123" rx="8" ry="17" transform="rotate(-46 117 123)"/>
-      <ellipse cx="155" cy="105" rx="7" ry="15" transform="rotate(32 155 105)"/>
-      <ellipse cx="174" cy="78" rx="7" ry="14" transform="rotate(44 174 78)"/>
-      <ellipse cx="62" cy="158" rx="8" ry="16" transform="rotate(-22 62 158)"/>
-      <ellipse cx="139" cy="152" rx="7" ry="16" transform="rotate(-18 139 152)"/>
-    </g>
-    <g>
-      <g transform="translate(126 66)">
-        <circle cx="0" cy="0" r="13" fill="rgba(239,212,218,0.98)"/>
-        <circle cx="-8" cy="-2" r="6.5" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="8" cy="-2" r="6.5" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="-8" r="6.5" fill="rgba(201,137,152,0.88)"/>
-        <circle cx="0" cy="0" r="3" fill="rgba(247,231,184,0.68)"/>
-      </g>
-      <g transform="translate(175 78)">
-        <circle cx="0" cy="0" r="10" fill="rgba(239,212,218,0.98)"/>
-        <circle cx="-6" cy="-1" r="5.2" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="6" cy="-1" r="5.2" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="-6" r="5" fill="rgba(201,137,152,0.88)"/>
-      </g>
-      <g transform="translate(117 123)">
-        <circle cx="0" cy="0" r="11" fill="rgba(239,212,218,0.98)"/>
-        <circle cx="-7" cy="-1" r="5.6" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="7" cy="-1" r="5.6" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="-7" r="5.3" fill="rgba(201,137,152,0.88)"/>
-      </g>
-      <g transform="translate(64 158)">
-        <circle cx="0" cy="0" r="12" fill="rgba(239,212,218,0.98)"/>
-        <circle cx="-7" cy="-1" r="6" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="7" cy="-1" r="6" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="-7" r="5.5" fill="rgba(201,137,152,0.88)"/>
-      </g>
-      <g transform="translate(139 152)">
-        <circle cx="0" cy="0" r="8" fill="rgba(239,212,218,0.98)"/>
-        <circle cx="-5" cy="-1" r="4" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="5" cy="-1" r="4" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="-5" r="4" fill="rgba(201,137,152,0.88)"/>
-      </g>
-    </g>
-    <g fill="rgba(247,231,184,0.72)">
-      <circle cx="156" cy="104" r="1.8"/>
-      <circle cx="145" cy="111" r="1.4"/>
-      <circle cx="52" cy="149" r="1.5"/>
-      <circle cx="134" cy="145" r="1.3"/>
-    </g>
-  </svg>`;
-}
-
-function wreathSVG(width = 320) {
-  return `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="${width}" height="${Math.round(width * 0.285)}">
-    <g fill="none" stroke="rgba(187,170,145,0.32)" stroke-width="1.05" stroke-linecap="round">
-      <path d="M24 94 C70 76, 108 52, 144 26"/>
-      <path d="M396 94 C350 76, 312 52, 276 26"/>
-      <path d="M144 32 C168 52, 189 61, 210 61 C231 61, 252 52, 276 32"/>
-    </g>
-    <g transform="translate(128 12)">${roseClusterSVG(66, true).replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</g>
-    <g transform="translate(228 12) scale(-1 1) translate(-66 0)">${roseClusterSVG(66, true).replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</g>
-    <g transform="translate(180 0)">${roseClusterSVG(82, true).replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')}</g>
-    <g fill="rgba(196,184,165,0.6)">
-      <ellipse cx="95" cy="49" rx="9" ry="18" transform="rotate(-28 95 49)"/>
-      <ellipse cx="325" cy="49" rx="9" ry="18" transform="rotate(28 325 49)"/>
-      <ellipse cx="72" cy="75" rx="7" ry="15" transform="rotate(-44 72 75)"/>
-      <ellipse cx="348" cy="75" rx="7" ry="15" transform="rotate(44 348 75)"/>
-    </g>
-  </svg>`;
-}
-
-function miniDividerSVG(width = 165) {
-  return `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 42" width="${width}" height="42">
-      <g fill="none" stroke="rgba(201,168,76,0.34)" stroke-width="1">
-        <path d="M4 21 H66"/>
-        <path d="M114 21 H176"/>
-      </g>
-      <g transform="translate(90 21)">
-        <circle cx="0" cy="0" r="8" fill="rgba(239,212,218,0.96)"/>
-        <circle cx="-9" cy="0" r="4" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="9" cy="0" r="4" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="-8" r="4" fill="rgba(221,169,178,0.96)"/>
-        <circle cx="0" cy="8" r="4" fill="rgba(201,137,152,0.9)"/>
-        <circle cx="0" cy="0" r="2" fill="rgba(247,231,184,0.75)"/>
-      </g>
-    </svg>`;
-}
-
-function injectStaticFlorals() {
-  document.querySelectorAll('.floral-holder').forEach(el => {
-    el.innerHTML = delicateSpraySVG(150);
-  });
-  document.getElementById('envTopWreath').innerHTML = wreathSVG(255);
-  document.getElementById('envBottomWreath').innerHTML = wreathSVG(255);
-  document.getElementById('flapFloral').innerHTML = wreathSVG(270);
-  document.getElementById('topFloralCrown').innerHTML = wreathSVG(330);
-  document.getElementById('bottomFloralCrown').innerHTML = wreathSVG(330);
-  document.getElementById('miniDivider1').innerHTML = miniDividerSVG(165);
-  document.getElementById('miniDivider2').innerHTML = miniDividerSVG(165);
-  document.getElementById('envMiniFlowers').innerHTML = roseClusterSVG(28, true) + roseClusterSVG(28, true) + roseClusterSVG(28, true);
-}
-// reposition flowers to avoid corners (more natural layout)
-function injectStaticFlorals() {
-  document.querySelectorAll('.floral-holder').forEach(el => {
-    el.innerHTML = "";
-  });
-
-  const container = document.getElementById('invitation-card');
-
-  const positions = [
-    {top:'12%', left:'20%'},
-    {top:'18%', right:'18%'},
-    {bottom:'15%', left:'25%'},
-    {bottom:'20%', right:'22%'},
-    {top:'50%', left:'10%'},
-    {top:'55%', right:'10%'}
-  ];
-
-  positions.forEach(p => {
-    const el = document.createElement('div');
-    el.style.position = 'absolute';
-    el.style.zIndex = '2';
-    el.style.opacity = '0.85';
-    el.innerHTML = roseClusterSVG(90 + Math.random()*40);
-
-    Object.assign(el.style, p);
-    container.appendChild(el);
-  });
-}
-injectStaticFlorals();
-
-function addLocalSparkles(containerId, amount, className) {
-  const el = document.getElementById(containerId);
-  const palette = [
-    'rgba(255,255,255,0.98)',
-    'rgba(255,235,165,0.95)',
-    'rgba(255,220,120,0.88)',
-    'rgba(255,245,215,0.9)'
-  ];
-  for (let i = 0; i < amount; i++) {
-    const s = document.createElement('span');
-    s.className = className;
-    const sz = Math.random() * 7 + 3;
-    const shape = Math.random();
-    const clip = shape > 0.66
-      ? 'polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)'
-      : shape > 0.33
-        ? 'polygon(50% 0%,100% 50%,50% 100%,0 50%)'
-        : 'polygon(40% 0%,60% 0%,60% 40%,100% 40%,100% 60%,60% 60%,60% 100%,40% 100%,40% 60%,0 60%,0 40%,40% 40%)';
-    s.style.cssText = `
-      left:${Math.random() * 100}%;
-      top:${Math.random() * 100}%;
-      width:${sz}px;height:${sz}px;
-      background:${palette[Math.floor(Math.random() * palette.length)]};
-      box-shadow:0 0 ${Math.random() * 14 + 8}px rgba(255,255,255,0.92),0 0 ${Math.random() * 18 + 10}px rgba(255,220,120,0.46);
-      animation-duration:${Math.random() * 2.8 + 1.6}s;
-      animation-delay:${Math.random() * 4}s;
-      clip-path:${clip};
-    `;
-    el.appendChild(s);
-  }
-}
-addLocalSparkles('envelopeSparkles', 30, 'local-spark');
-addLocalSparkles('cardSparkles', 42, 'card-local-spark');
-
-const petalColors = [
-  'rgba(255,200,200,0.76)','rgba(255,225,215,0.68)',
-  'rgba(255,242,228,0.76)','rgba(242,205,225,0.72)',
-  'rgba(255,185,185,0.66)','rgba(201,168,76,0.22)',
-  'rgba(255,248,210,0.68)','rgba(255,255,255,0.62)',
-  'rgba(250,240,255,0.58)','rgba(255,255,240,0.64)'
+// ======== PETALS ========
+const petalColors=[
+  'rgba(255,200,200,0.72)','rgba(255,225,215,0.65)',
+  'rgba(255,242,228,0.72)','rgba(242,205,225,0.68)',
+  'rgba(255,185,185,0.62)','rgba(201,168,76,0.2)',
+  'rgba(255,248,210,0.65)','rgba(255,255,255,0.58)',
+  'rgba(250,240,255,0.55)','rgba(255,255,240,0.6)',
 ];
 function createPetal(){
-  const p = document.createElement('div');
-  p.className = 'petal';
-  const sz = Math.random() * 13 + 7;
-  p.style.cssText = `
+  const p=document.createElement('div');
+  p.className='petal';
+  const sz=Math.random()*13+7;
+  p.style.cssText=`
     left:${Math.random()*114-7}%;
     width:${sz}px;height:${sz*1.35}px;
     background:${petalColors[Math.floor(Math.random()*petalColors.length)]};
@@ -1119,26 +571,32 @@ function createPetal(){
   document.getElementById('petals-layer').appendChild(p);
   setTimeout(()=>p.remove(),24000);
 }
-for(let i=0;i<34;i++) setTimeout(createPetal,i*340);
-setInterval(createPetal,430);
+for(let i=0;i<26;i++) setTimeout(createPetal,i*460);
+setInterval(createPetal,600);
 
-function flowerSVG(sz, op){
-  const petC = `rgba(255,255,255,${op})`;
-  const ctrC = `rgba(255,248,210,${op*0.8})`;
-  const n = Math.random()>0.5 ? 6 : 8;
-  const petals = Array.from({length:n},(_,i)=>{
+// ======== WHITE FLOWERS ========
+function flowerSVG(sz,op){
+  const petC=`rgba(255,255,255,${op})`;
+  const ctrC=`rgba(255,248,210,${op*0.8})`;
+  const n=Math.random()>0.5?6:8;
+  const petals=Array.from({length:n},(_,i)=>{
     const a=i*(360/n);
-    return `<ellipse rx="${sz*0.12}" ry="${sz*0.28}" fill="${petC}" transform="rotate(${a},${sz/2},${sz/2}) translate(${sz/2},${sz/2-sz*0.22})" opacity="0.85"/>`;
+    return `<ellipse rx="${sz*0.12}" ry="${sz*0.28}" fill="${petC}"
+      transform="rotate(${a},${sz/2},${sz/2}) translate(${sz/2},${sz/2-sz*0.22})" opacity="0.85"/>`;
   }).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}">${petals}<circle cx="${sz/2}" cy="${sz/2}" r="${sz*0.1}" fill="${ctrC}"/><circle cx="${sz/2}" cy="${sz/2}" r="${sz*0.055}" fill="rgba(255,255,255,0.95)"/></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}">
+    ${petals}
+    <circle cx="${sz/2}" cy="${sz/2}" r="${sz*0.1}" fill="${ctrC}"/>
+    <circle cx="${sz/2}" cy="${sz/2}" r="${sz*0.055}" fill="rgba(255,255,255,0.95)"/>
+  </svg>`;
 }
 function createWhiteFlower(){
-  const el = document.createElement('div');
-  el.className = 'wflower';
-  const sz = Math.random()*22+10;
-  const op = Math.random()*0.5+0.35;
-  el.innerHTML = flowerSVG(sz,op);
-  el.style.cssText = `
+  const el=document.createElement('div');
+  el.className='wflower';
+  const sz=Math.random()*22+10;
+  const op=Math.random()*0.5+0.35;
+  el.innerHTML=flowerSVG(sz,op);
+  el.style.cssText=`
     left:${Math.random()*108-4}%;
     animation-duration:${Math.random()*13+11}s;
     animation-delay:${Math.random()*16}s;
@@ -1147,38 +605,19 @@ function createWhiteFlower(){
   document.getElementById('flowers-layer').appendChild(el);
   setTimeout(()=>el.remove(),30000);
 }
-for(let i=0;i<28;i++) setTimeout(createWhiteFlower,i*480);
-setInterval(createWhiteFlower,540);
+for(let i=0;i<18;i++) setTimeout(createWhiteFlower,i*700);
+setInterval(createWhiteFlower,800);
 
-function createAmbientBloom() {
-  const el = document.createElement('div');
-  el.className = 'ambient-bloom';
-  const size = Math.random()*90 + 105;
-  el.innerHTML = roseClusterSVG(size, true);
-  const side = Math.random();
-  el.style.cssText = `
-    left:${side < 0.5 ? Math.random()*14 - 5 : 83 + Math.random()*15}%;
-    top:${Math.random()*82 - 4}%;
-    width:${size}px;height:${size}px;
-    animation-duration:${Math.random()*8 + 9}s;
-    animation-delay:${Math.random()*5}s;
-    opacity:0.11;
-  `;
-  document.getElementById('bloom-layer').appendChild(el);
-  setTimeout(()=>el.remove(),22000);
-}
-for(let i=0;i<6;i++) setTimeout(createAmbientBloom,i*1100);
-setInterval(createAmbientBloom,3400);
-
+// ======== GLOW ORBS ========
 function createGlow(){
-  const g = document.createElement('div');
-  g.className = 'glow-orb';
-  const isWhite = Math.random()>0.28;
-  const sz = Math.random()*170+60;
-  const col = isWhite
-    ? `rgba(255,255,255,${Math.random()*0.16+0.05})`
-    : `rgba(255,225,80,${Math.random()*0.11+0.03})`;
-  g.style.cssText = `
+  const g=document.createElement('div');
+  g.className='glow-orb';
+  const isWhite=Math.random()>0.35;
+  const sz=Math.random()*160+60;
+  const col=isWhite
+    ?`rgba(255,255,255,${Math.random()*0.14+0.04})`
+    :`rgba(255,225,80,${Math.random()*0.09+0.02})`;
+  g.style.cssText=`
     left:${Math.random()*100}%;
     top:${Math.random()*100}%;
     width:${sz}px;height:${sz}px;
@@ -1190,38 +629,40 @@ function createGlow(){
   document.getElementById('glows-layer').appendChild(g);
   setTimeout(()=>g.remove(),16000);
 }
-for(let i=0;i<24;i++) setTimeout(createGlow,i*380);
-setInterval(createGlow,430);
+for(let i=0;i<20;i++) setTimeout(createGlow,i*500);
+setInterval(createGlow,600);
 
-const sparkTypes = ['','star','cross','diamond'];
+// ======== SPARKLES ========
+const sparkTypes=['','star','cross'];
 function createSparkle(){
-  const s = document.createElement('div');
-  s.className = 'sparkle ' + sparkTypes[Math.floor(Math.random()*sparkTypes.length)];
-  const isGold = Math.random()>0.4;
-  const sz = Math.random()*8+3;
-  s.style.cssText = `
+  const s=document.createElement('div');
+  s.className='sparkle '+sparkTypes[Math.floor(Math.random()*3)];
+  const isGold=Math.random()>0.45;
+  const sz=Math.random()*7+3;
+  s.style.cssText=`
     left:${Math.random()*100}%;
     top:${Math.random()*100}%;
     width:${sz}px;height:${sz}px;
-    background:${isGold?'rgba(255,220,80,0.95)':'rgba(255,255,255,0.98)'};
-    animation-duration:${Math.random()*2.2+1.2}s;
+    background:${isGold?'rgba(255,220,80,0.9)':'rgba(255,255,255,0.95)'};
+    animation-duration:${Math.random()*2.2+1.4}s;
     animation-delay:${Math.random()*4}s;
-    filter:blur(${Math.random()*0.35}px);
-    box-shadow:0 0 ${isGold?8:10}px ${isGold?'rgba(255,210,60,0.78)':'rgba(255,255,255,0.98)'},0 0 ${isGold?18:20}px rgba(255,245,190,0.35);
+    filter:blur(${Math.random()*0.4}px);
+    box-shadow:0 0 ${isGold?6:9}px ${isGold?'rgba(255,210,60,0.7)':'rgba(255,255,255,0.95)'};
   `;
   document.getElementById('sparkles-layer').appendChild(s);
   setTimeout(()=>s.remove(),5000);
 }
-for(let i=0;i<84;i++) setTimeout(createSparkle,i*70);
-setInterval(createSparkle,110);
+for(let i=0;i<50;i++) setTimeout(createSparkle,i*100);
+setInterval(createSparkle,170);
 
+// ======== LIGHT RAYS ========
 function createRay(){
-  const r = document.createElement('div');
-  r.className = 'light-ray';
-  r.style.cssText = `
+  const r=document.createElement('div');
+  r.className='light-ray';
+  r.style.cssText=`
     left:${Math.random()*100}%;
-    width:${Math.random()*5+1}px;
-    height:${Math.random()*42+42}vh;
+    width:${Math.random()*4+1}px;
+    height:${Math.random()*40+40}vh;
     transform:rotate(${Math.random()*36-18}deg);
     animation-duration:${Math.random()*5+3}s;
     animation-delay:${Math.random()*6}s;
@@ -1229,28 +670,29 @@ function createRay(){
   document.body.appendChild(r);
   setTimeout(()=>r.remove(),10000);
 }
-for(let i=0;i<8;i++) setTimeout(createRay,i*900);
-setInterval(createRay,1350);
+for(let i=0;i<6;i++) setTimeout(createRay,i*1100);
+setInterval(createRay,1800);
 
-const envFlap = document.getElementById('envFlap');
-const seal = document.getElementById('seal');
-const openBtn = document.getElementById('openBtn');
-const invCard = document.getElementById('invitation-card');
-const closeCard = document.getElementById('closeCard');
-let opened = false;
+// ======== ENVELOPE OPEN ========
+const envFlap  =document.getElementById('envFlap');
+const seal     =document.getElementById('seal');
+const openBtn  =document.getElementById('openBtn');
+const invCard  =document.getElementById('invitation-card');
+const closeCard=document.getElementById('closeCard');
+let opened=false;
 
 function openEnvelope(){
   if(opened) return;
-  opened = true;
+  opened=true;
   openBtn.classList.add('hidden');
   envFlap.classList.add('open');
-  seal.style.opacity = '0';
-  seal.style.transform = 'translateX(-50%) scale(0)';
-  seal.style.transition = 'all 0.5s ease';
+  seal.style.opacity='0';
+  seal.style.transform='translateX(-50%) scale(0)';
+  seal.style.transition='all 0.5s ease';
   setTimeout(()=>{
-    const sc = document.getElementById('envelope-scene');
-    sc.style.opacity = '0';
-    sc.style.pointerEvents = 'none';
+    const sc=document.getElementById('envelope-scene');
+    sc.style.opacity='0';
+    sc.style.pointerEvents='none';
     setTimeout(()=>{
       invCard.classList.add('visible');
       closeCard.classList.add('visible');
@@ -1262,49 +704,41 @@ closeCard.addEventListener('click',()=>{
   invCard.classList.remove('visible');
   closeCard.classList.remove('visible');
   setTimeout(()=>{
-    const sc = document.getElementById('envelope-scene');
-    sc.style.opacity = '1';
-    sc.style.pointerEvents = 'all';
+    const sc=document.getElementById('envelope-scene');
+    sc.style.opacity='1';
+    sc.style.pointerEvents='all';
     envFlap.classList.remove('open');
-    seal.style.opacity = '1';
-    seal.style.transform = 'translateX(-50%) scale(1)';
+    seal.style.opacity='1';
+    seal.style.transform='translateX(-50%) scale(1)';
     openBtn.classList.remove('hidden');
-    opened = false;
+    opened=false;
   },600);
 });
 
+// ======== COUNTDOWN ========
 function updateCountdown(){
-  const diff = new Date('2026-12-21T20:00:00') - new Date();
-  if(diff <= 0){
+  const diff=new Date('2026-12-21T20:00:00')-new Date();
+  if(diff<=0){
     ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');
     return;
   }
-  document.getElementById('cd-days').textContent = String(Math.floor(diff/86400000)).padStart(3,'0');
-  document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-  document.getElementById('cd-mins').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-  document.getElementById('cd-secs').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  document.getElementById('cd-days').textContent =String(Math.floor(diff/86400000)).padStart(3,'0');
+  document.getElementById('cd-hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent =String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent =String(Math.floor((diff%60000)/1000)).padStart(2,'0');
 }
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-const audio = document.getElementById('weddingAudio');
-const soundBtn = document.getElementById('soundBtn');
-audio.src = 'https://www.bensound.com/bensound-music/bensound-romantic.mp3';
-audio.volume = 0.22;
-let soundOn = false;
+// ======== SOUND ========
+const audio=document.getElementById('weddingAudio');
+const soundBtn=document.getElementById('soundBtn');
+audio.src='https://www.bensound.com/bensound-music/bensound-romantic.mp3';
+audio.volume=0.22;
+let soundOn=false;
 soundBtn.addEventListener('click',()=>{
-  if(soundOn){
-    audio.pause();
-    soundBtn.textContent = '🔇';
-    soundOn = false;
-  } else {
-    audio.play().then(()=>{
-      soundBtn.textContent = '🔊';
-      soundOn = true;
-    }).catch(()=>{
-      soundBtn.textContent = '🔇';
-    });
-  }
+  if(soundOn){audio.pause();soundBtn.textContent='🔇';soundOn=false;}
+  else{audio.play().then(()=>{soundBtn.textContent='🔊';soundOn=true;}).catch(()=>{soundBtn.textContent='🔇';});}
 });
 </script>
 </body>
