@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#C8102E">
+<title>Pronos Groupe B · Ligue des champions CAF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8102E;
+  --red-deep:#8E0A20;
+  --white:#FFFFFF;
+  --paper:#FFFFFF;
+  --surface:#FBF6F2;
+  --ink:#24110F;
+  --muted:#7A5F59;
+  --line:#EADCD5;
+  --gold:#E8A317;
+  --earth:#9C4A1A;
+  --green:#1E7A45;
+  --input-bg:#FFFFFF;
+  --ca-row:#FFF1F2;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#170C0B;
+    --surface:#22130F;
+    --ink:#F7ECE8;
+    --muted:#BFA39C;
+    --line:#3B2620;
+    --input-bg:#2C1915;
+    --ca-row:#3A1218;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Barlow Semi Condensed",system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.45;
+  min-height:100vh;
+}
+
+/* ––––– Hero ––––– */
+.hero{
+position:relative;
+background:var(–red);
+color:var(–white);
+padding:28px 20px 46px;
+overflow:hidden;
+}
+.hero::before{ /* motif bogolan blanc en filigrane */
+content:””;
+position:absolute;inset:0;
+background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘48’ height=‘48’ viewBox=‘0 0 48 48’%3E%3Cg fill=‘none’ stroke=’%23fff’ stroke-width=‘2’ opacity=’.13’%3E%3Cpath d=‘M0 12 L12 0 L24 12 L36 0 L48 12’/%3E%3Cpath d=‘M0 36 L12 24 L24 36 L36 24 L48 36’/%3E%3Ccircle cx=‘12’ cy=‘42’ r=‘2.5’ fill=’%23fff’/%3E%3Ccircle cx=‘36’ cy=‘18’ r=‘2.5’ fill=’%23fff’/%3E%3C/g%3E%3C/svg%3E”);
+}
+.hero::after{ /* bord en dents de scie */
+content:””;
+position:absolute;left:0;right:0;bottom:-1px;height:16px;
+background:
+linear-gradient(135deg,var(–paper) 50%,transparent 50%) 0 0/16px 16px repeat-x,
+linear-gradient(225deg,var(–paper) 50%,transparent 50%) 0 0/16px 16px repeat-x;
+transform:rotate(180deg);
+}
+.hero-inner{position:relative;max-width:560px;margin:0 auto}
+.comp{
+font-weight:600;font-size:15px;letter-spacing:.02em;
+display:flex;align-items:center;gap:8px;opacity:.95;
+}
+.star{width:16px;height:16px;fill:var(–gold);flex:none}
+.hero h1{
+font-family:“Anton”,Impact,sans-serif;
+font-weight:400;
+font-size:clamp(72px,24vw,128px);
+line-height:.88;
+letter-spacing:-.01em;
+margin:14px 0 10px;
+text-shadow:4px 4px 0 var(–red-deep);
+}
+.hero p{font-size:17px;max-width:30ch;opacity:.95}
+.kente{
+display:flex;gap:4px;margin-top:20px;
+}
+.kente span{height:8px;flex:1;border-radius:2px;background:var(–white)}
+.kente span:nth-child(3n+2){background:var(–gold)}
+.kente span:nth-child(4n){background:var(–red-deep)}
+
+/* ––––– Layout ––––– */
+main{max-width:560px;margin:0 auto;padding:8px 16px 40px}
+.name-field{margin:18px 0 6px}
+.name-field label{display:block;font-weight:600;font-size:15px;color:var(–muted);margin-bottom:6px}
+.name-field input{
+width:100%;font:inherit;font-size:18px;
+padding:12px 14px;border-radius:10px;
+border:2px solid var(–line);background:var(–input-bg);color:var(–ink);
+}
+.name-field input:focus{outline:none;border-color:var(–red)}
+
+.progress{
+position:sticky;top:0;z-index:5;
+background:var(–paper);
+padding:12px 0 10px;margin:8px 0 4px;
+border-bottom:1px solid var(–line);
+}
+.progress-row{display:flex;justify-content:space-between;font-weight:600;font-size:15px;margin-bottom:6px}
+.progress-row b{color:var(–red)}
+.bar{height:6px;background:var(–line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(–red);transition:width .3s ease}
+
+/* ––––– Journées ––––– */
+.day{margin-top:26px}
+.day-head{
+display:flex;align-items:baseline;justify-content:space-between;
+border-left:6px solid var(–red);
+padding-left:10px;margin-bottom:10px;
+}
+.day-head h2{font-family:“Anton”,Impact,sans-serif;font-weight:400;font-size:26px;letter-spacing:.01em}
+.day-head time{font-size:15px;color:var(–muted);font-weight:500}
+
+.match{
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+gap:8px;
+padding:14px 10px;
+border:1px solid var(–line);
+border-radius:14px;
+background:var(–surface);
+margin-bottom:10px;
+}
+.match.ca{
+background:var(–ca-row);
+border:2px solid var(–red);
+position:relative;
+}
+.match.ca::before{
+content:””;position:absolute;left:14px;right:14px;top:-2px;height:4px;
+background:repeating-linear-gradient(90deg,var(–red) 0 10px,var(–white) 10px 20px);
+border-radius:0 0 4px 4px;
+}
+.team{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;min-width:0}
+.team-name{font-weight:600;font-size:15px;line-height:1.15}
+.team-name.is-ca{color:var(–red);font-weight:700}
+.crest{
+width:44px;height:44px;border-radius:50%;
+display:grid;place-items:center;
+font-family:“Anton”,Impact,sans-serif;font-size:14px;letter-spacing:.02em;
+border:3px solid;
+}
+.crest-CA{background:var(–red);color:#fff;border-color:#fff;box-shadow:0 0 0 2px var(–red)}
+.crest-ZAM{background:#fff;color:#C4161C;border-color:#C4161C;background-image:linear-gradient(180deg,transparent 40%,#C4161C 40% 52%,transparent 52%)}
+.crest-MCA{background:#D21F2B;color:#fff;border-color:#0E7A3C}
+.crest-YAN{background:#0E7A3C;color:#FFD200;border-color:#FFD200}
+
+.score{display:flex;align-items:center;gap:6px}
+.score input{
+width:52px;height:60px;
+font-family:“Anton”,Impact,sans-serif;font-size:32px;text-align:center;
+border-radius:10px;border:2px solid var(–line);
+background:var(–input-bg);color:var(–ink);
+-moz-appearance:textfield;
+}
+.score input::placeholder{color:var(–line)}
+.score input:focus{outline:none;border-color:var(–red);box-shadow:0 0 0 3px rgba(200,16,46,.2)}
+.score input.filled{border-color:var(–ink)}
+.match.ca .score input.filled{border-color:var(–red)}
+.score .sep{font-family:“Anton”,Impact,sans-serif;font-size:22px;color:var(–muted)}
+
+.venue{grid-column:1 / -1;text-align:center;font-size:13px;color:var(–muted);margin-top:-2px}
+
+/* ––––– Classement ––––– */
+.standings{margin-top:40px}
+.standings-head{
+background:var(–red);color:#fff;
+border-radius:16px 16px 0 0;
+padding:18px 16px 14px;
+position:relative;overflow:hidden;
+}
+.standings-head::before{
+content:””;position:absolute;inset:0;
+background:repeating-linear-gradient(45deg,rgba(255,255,255,.08) 0 8px,transparent 8px 16px);
+}
+.standings-head h2{position:relative;font-family:“Anton”,Impact,sans-serif;font-weight:400;font-size:30px;line-height:1}
+.standings-head p{position:relative;font-size:15px;margin-top:4px;opacity:.95}
+.table-wrap{border:2px solid var(–red);border-top:none;border-radius:0 0 16px 16px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th{font-weight:600;font-size:13px;color:var(–muted);padding:10px 4px;text-align:center;border-bottom:1px solid var(–line)}
+th.t-team{text-align:left}
+td{padding:12px 4px;text-align:center;border-bottom:1px solid var(–line);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+td.pos{font-family:“Anton”,Impact,sans-serif;font-size:20px;width:34px}
+td.t-team{text-align:left}
+.t-team-inner{display:flex;align-items:center;gap:8px;font-weight:600}
+.t-team-inner .crest{width:30px;height:30px;font-size:10px;border-width:2px;flex:none}
+td.pts{font-family:“Anton”,Impact,sans-serif;font-size:22px;color:var(–red);width:42px}
+tr.qualified td.pos{color:var(–green)}
+tr.qualified{background:linear-gradient(90deg,rgba(30,122,69,.10),transparent 70%)}
+tr.row-ca .t-team-inner span{color:var(–red);font-weight:700}
+.legend{display:flex;align-items:center;gap:8px;font-size:14px;color:var(–muted);padding:10px 12px}
+.legend i{width:12px;height:12px;border-radius:3px;background:var(–green);flex:none}
+
+.verdict{
+margin-top:16px;padding:16px;border-radius:14px;
+background:var(–surface);border:1px dashed var(–red);
+font-size:17px;font-weight:500;display:none;
+}
+.verdict.show{display:block}
+.verdict strong{color:var(–red)}
+
+/* ––––– Actions ––––– */
+.actions{display:grid;gap:10px;margin-top:22px}
+.btn{
+font:inherit;font-weight:700;font-size:18px;
+padding:15px 16px;border-radius:12px;border:none;cursor:pointer;
+display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn:focus-visible{outline:3px solid var(–gold);outline-offset:2px}
+.btn-primary{background:var(–red);color:#fff;box-shadow:0 4px 0 var(–red-deep)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 2px 0 var(–red-deep)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.btn-ghost{background:transparent;color:var(–muted);border:2px solid var(–line)}
+.hint{text-align:center;font-size:14px;color:var(–muted)}
+
+.toast{
+position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);
+background:var(–ink);color:var(–paper);
+padding:12px 18px;border-radius:999px;font-weight:600;font-size:15px;
+transition:transform .25s ease;z-index:20;white-space:nowrap;
+}
+.toast.show{transform:translate(-50%,0)}
+
+footer{
+margin-top:36px;padding:18px 16px 30px;text-align:center;font-size:14px;color:var(–muted);
+border-top:1px solid var(–line);
+}
+footer .stripes{height:6px;margin:0 auto 14px;max-width:120px;border-radius:3px;
+background:repeating-linear-gradient(90deg,var(–red) 0 12px,var(–white) 12px 24px);
+border:1px solid var(–red)}
+
+@media (prefers-reduced-motion: reduce){
+*{transition:none!important}
+}
+@media (max-width:360px){
+.score input{width:46px;height:54px;font-size:28px}
+.team-name{font-size:14px}
+th,td{padding-left:2px;padding-right:2px}
+}
+</style>
+
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="comp">
+      <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6z"/></svg>
+      Ligue des champions CAF 2026/27
+    </div>
+    <h1>Groupe B</h1>
+    <p>Pronostique les 12 matchs de la poule et découvre le classement final.</p>
+    <div class="kente" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<main>
+  <div class="name-field">
+    <label for="player">Ton prénom</label>
+    <input id="player" type="text" placeholder="Ex : Fahd" autocomplete="given-name" maxlength="24">
+  </div>
+
+  <div class="progress" aria-live="polite">
+    <div class="progress-row"><span>Tes pronostics</span><span><b id="count">0</b> / 12</span></div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+
+  <div id="days"></div>
+
+  <section class="standings" aria-labelledby="st-title">
+    <div class="standings-head">
+      <h2 id="st-title">Classement provisoire</h2>
+      <p id="st-sub">Il te reste 12 matchs à pronostiquer.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th class="t-team">Équipe</th><th>J</th><th>G</th><th>N</th><th>P</th><th>Diff</th><th>Pts</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="legend"><i></i>Qualifiés pour les quarts de finale</div>
+    </div>
+    <div class="verdict" id="verdict"></div>
+  </section>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="share" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+      Partager mes pronos
+    </button>
+    <p class="hint" id="share-hint">Remplis les 12 scores pour partager.</p>
+    <button class="btn btn-ghost" id="reset">Effacer tous les scores</button>
+  </div>
+</main>
+
+<footer>
+  <div class="stripes" aria-hidden="true"></div>
+  Fait pour les supporters du Club Africain. Allez le CA !
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const TEAMS = {
+  CA:  { name:"Club Africain",  code:"CA",  country:"Tunisie" },
+  ZAM: { name:"Zamalek",        code:"ZAM", country:"Égypte" },
+  MCA: { name:"MC Alger",       code:"MCA", country:"Algérie" },
+  YAN: { name:"Young Africans", code:"YAN", country:"Tanzanie" }
+};
+
+// Calendrier du groupe B (dates des fenêtres CAF)
+const DAYS = [
+  { n:1, date:"27 – 29 nov. 2026", matches:[["ZAM","CA"],["YAN","MCA"]] },
+  { n:2, date:"4 – 6 déc. 2026",   matches:[["CA","YAN"],["MCA","ZAM"]] },
+  { n:3, date:"18 – 20 déc. 2026", matches:[["CA","MCA"],["ZAM","YAN"]] },
+  { n:4, date:"8 – 10 janv. 2027", matches:[["MCA","CA"],["YAN","ZAM"]] },
+  { n:5, date:"15 – 17 janv. 2027",matches:[["CA","ZAM"],["MCA","YAN"]] },
+  { n:6, date:"22 – 24 janv. 2027",matches:[["YAN","CA"],["ZAM","MCA"]] }
+];
+
+const VENUES = { CA:"Radès", ZAM:"Le Caire", MCA:"Alger", YAN:"Dar es Salaam" };
+
+// Liste à plat des 12 matchs
+const MATCHES = [];
+DAYS.forEach(d => d.matches.forEach(([h,a]) => MATCHES.push({ day:d.n, h, a, hs:null, as:null })));
+
+const crest = code => `<span class="crest crest-${code}" aria-hidden="true">${code}</span>`;
+
+function render(){
+  const wrap = document.getElementById("days");
+  let i = 0;
+  wrap.innerHTML = DAYS.map(d => {
+    const rows = d.matches.map(([h,a]) => {
+      const idx = i++;
+      const isCA = h === "CA" || a === "CA";
+      return `
+      <div class="match ${isCA ? "ca" : ""}">
+        <div class="team">${crest(h)}<span class="team-name ${h==="CA"?"is-ca":""}">${TEAMS[h].name}</span></div>
+        <div class="score">
+          <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="–"
+                 data-i="${idx}" data-side="h" aria-label="Buts ${TEAMS[h].name}">
+          <span class="sep" aria-hidden="true">:</span>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="–"
+                 data-i="${idx}" data-side="a" aria-label="Buts ${TEAMS[a].name}">
+        </div>
+        <div class="team">${crest(a)}<span class="team-name ${a==="CA"?"is-ca":""}">${TEAMS[a].name}</span></div>
+        <div class="venue">à ${VENUES[h]}</div>
+      </div>`;
+    }).join("");
+    return `<section class="day"><div class="day-head"><h2>Journée ${d.n}</h2><time>${d.date}</time></div>${rows}</section>`;
+  }).join("");
+
+  wrap.querySelectorAll("input").forEach(inp => {
+    inp.addEventListener("input", onScore);
+    inp.addEventListener("focus", () => inp.select());
+  });
+}
+
+function onScore(e){
+  const inp = e.target;
+  const clean = inp.value.replace(/\D/g, "").slice(0,2);
+  inp.value = clean;
+  inp.classList.toggle("filled", clean !== "");
+  const m = MATCHES[+inp.dataset.i];
+  const val = clean === "" ? null : parseInt(clean,10);
+  if (inp.dataset.side === "h") m.hs = val; else m.as = val;
+
+  // Passe automatiquement à la case suivante
+  if (clean.length >= 1 && clean !== "1") {
+    const all = [...document.querySelectorAll("#days input")];
+    const next = all[all.indexOf(inp) + 1];
+    if (next && next.value === "") next.focus();
+  }
+  update();
+  save();
+}
+
+function computeTable(){
+  const st = {};
+  Object.keys(TEAMS).forEach(k => st[k] = { k, j:0, g:0, n:0, p:0, bp:0, bc:0, pts:0 });
+  const played = MATCHES.filter(m => m.hs !== null && m.as !== null);
+  played.forEach(m => apply(st, m));
+
+  const rows = Object.values(st);
+  rows.sort((x,y) => y.pts - x.pts);
+
+  // Départage CAF : confrontations directes, puis différence générale, puis buts marqués
+  const out = [];
+  let i = 0;
+  while (i < rows.length){
+    let j = i;
+    while (j + 1 < rows.length && rows[j+1].pts === rows[i].pts) j++;
+    const group = rows.slice(i, j + 1);
+    if (group.length > 1){
+      const keys = group.map(r => r.k);
+      const h2h = {};
+      keys.forEach(k => h2h[k] = { k, j:0, g:0, n:0, p:0, bp:0, bc:0, pts:0 });
+      played.filter(m => keys.includes(m.h) && keys.includes(m.a)).forEach(m => apply(h2h, m));
+      group.sort((x,y) =>
+        (h2h[y.k].pts - h2h[x.k].pts) ||
+        ((h2h[y.k].bp - h2h[y.k].bc) - (h2h[x.k].bp - h2h[x.k].bc)) ||
+        (h2h[y.k].bp - h2h[x.k].bp) ||
+        ((y.bp - y.bc) - (x.bp - x.bc)) ||
+        (y.bp - x.bp)
+      );
+    }
+    out.push(...group);
+    i = j + 1;
+  }
+  return { rows: out, played: played.length };
+}
+
+function apply(st, m){
+  const H = st[m.h], A = st[m.a];
+  H.j++; A.j++;
+  H.bp += m.hs; H.bc += m.as;
+  A.bp += m.as; A.bc += m.hs;
+  if (m.hs > m.as){ H.g++; A.p++; H.pts += 3; }
+  else if (m.hs < m.as){ A.g++; H.p++; A.pts += 3; }
+  else { H.n++; A.n++; H.pts++; A.pts++; }
+}
+
+function update(){
+  const { rows, played } = computeTable();
+  const done = played === 12;
+
+  document.getElementById("count").textContent = played;
+  document.getElementById("bar").style.width = (played / 12 * 100) + "%";
+  document.getElementById("st-title").textContent = done ? "Classement final" : "Classement provisoire";
+  const left = 12 - played;
+  document.getElementById("st-sub").textContent = done
+    ? "Selon tes pronostics, voici le groupe B à la fin de la phase de poules."
+    : `Il te reste ${left} match${left > 1 ? "s" : ""} à pronostiquer.`;
+
+  document.getElementById("tbody").innerHTML = rows.map((r, idx) => {
+    const diff = r.bp - r.bc;
+    return `<tr class="${idx < 2 && played > 0 ? "qualified" : ""} ${r.k === "CA" ? "row-ca" : ""}">
+      <td class="pos">${idx + 1}</td>
+      <td class="t-team"><div class="t-team-inner">${crest(r.k)}<span>${TEAMS[r.k].name}</span></div></td>
+      <td>${r.j}</td><td>${r.g}</td><td>${r.n}</td><td>${r.p}</td>
+      <td>${diff > 0 ? "+" + diff : diff}</td>
+      <td class="pts">${r.pts}</td>
+    </tr>`;
+  }).join("");
+
+  const verdict = document.getElementById("verdict");
+  if (done){
+    const pos = rows.findIndex(r => r.k === "CA") + 1;
+    const ca = rows.find(r => r.k === "CA");
+    let msg;
+    if (pos === 1) msg = `<strong>Le Club Africain termine premier</strong> avec ${ca.pts} points. Qualifié en quarts de finale !`;
+    else if (pos === 2) msg = `<strong>Le Club Africain termine deuxième</strong> avec ${ca.pts} points. Qualifié en quarts de finale !`;
+    else msg = `Le Club Africain termine ${pos}e avec ${ca.pts} points et sort en phase de poules. Courage aux Clubistes.`;
+    verdict.innerHTML = msg;
+    verdict.classList.add("show");
+  } else {
+    verdict.classList.remove("show");
+  }
+
+  document.getElementById("share").disabled = !done;
+  document.getElementById("share-hint").style.display = done ? "none" : "block";
+}
+
+function shareText(){
+  const name = document.getElementById("player").value.trim();
+  const { rows } = computeTable();
+  let t = `⚽ Pronos Groupe B, Ligue des champions CAF${name ? " — " + name : ""}\n\n`;
+  DAYS.forEach(d => {
+    t += `Journée ${d.n}\n`;
+    MATCHES.filter(m => m.day === d.n).forEach(m => {
+      t += `${TEAMS[m.h].name} ${m.hs}-${m.as} ${TEAMS[m.a].name}\n`;
+    });
+    t += "\n";
+  });
+  t += "Classement final\n";
+  rows.forEach((r, i) => t += `${i + 1}. ${TEAMS[r.k].name} ${r.pts} pts (${r.bp - r.bc >= 0 ? "+" : ""}${r.bp - r.bc})\n`);
+  t += "\n🔴⚪ Allez le CA !";
+  return t;
+}
+
+document.getElementById("share").addEventListener("click", async () => {
+  const text = shareText();
+  if (navigator.share){
+    try { await navigator.share({ text }); return; } catch(e){ if (e.name === "AbortError") return; }
+  }
+  try {
+    await navigator.clipboard.writeText(text);
+    toast("Pronos copiés. Colle-les dans ton groupe !");
+  } catch(e){
+    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+  }
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  if (!confirm("Effacer tous tes scores ?")) return;
+  MATCHES.forEach(m => { m.hs = null; m.as = null; });
+  document.querySelectorAll("#days input").forEach(i => { i.value = ""; i.classList.remove("filled"); });
+  update(); save();
+  toast("Scores effacés");
+});
+
+document.getElementById("player").addEventListener("input", save);
+
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+// Sauvegarde personnelle (disponible quand la page est ouverte dans Claude)
+let saveTimer;
+function save(){
+  if (!window.storage) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    try {
+      await window.storage.set("pronos-groupe-b", JSON.stringify({
+        name: document.getElementById("player").value,
+        scores: MATCHES.map(m => [m.hs, m.as])
+      }), false);
+    } catch(e){}
+  }, 400);
+}
+async function load(){
+  if (!window.storage) return;
+  try {
+    const res = await window.storage.get("pronos-groupe-b", false);
+    if (!res) return;
+    const data = JSON.parse(res.value);
+    document.getElementById("player").value = data.name || "";
+    data.scores.forEach(([h,a], i) => { MATCHES[i].hs = h; MATCHES[i].as = a; });
+    document.querySelectorAll("#days input").forEach(inp => {
+      const m = MATCHES[+inp.dataset.i];
+      const v = inp.dataset.side === "h" ? m.hs : m.as;
+      if (v !== null){ inp.value = v; inp.classList.add("filled"); }
+    });
+    update();
+  } catch(e){}
+}
+
+render();
+update();
+load();
+</script>
+
+</body>
+</html>
