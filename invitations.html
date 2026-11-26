@@ -6,7 +6,7 @@
 <title>دعوة زفاف فهد & إلهام</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel+Decorative:wght@400;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel+Decorative:wght@400;700&family=Tangerine:wght@400;700&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A84C;
@@ -377,14 +377,13 @@
   .close-card:hover{background:var(--gold);color:white;}
   .close-card.visible{display:block;}
 
-  .sound-btn{
-    position:fixed;bottom:20px;right:20px;z-index:300;
-    background:rgba(255,248,220,0.93);border:1px solid var(--gold);
-    color:var(--gold-dark);font-size:20px;width:44px;height:44px;
-    border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
-    box-shadow:0 4px 14px rgba(180,140,50,0.22);transition:all 0.2s;
+  /* Waw calligraphique entre les prénoms */
+  .couple-names-ar .waw{
+    font-family:'Aref Ruqaa','Amiri',serif;font-weight:700;
+    font-size:1.35em;letter-spacing:0;
+    display:inline-block;margin:0 0.12em;
+    vertical-align:-0.08em;
   }
-  .sound-btn:hover{background:var(--gold);color:white;}
 
   @media(max-width:480px){
     .card-body{padding:24px 16px;}
@@ -402,7 +401,6 @@
 <div id="glows-layer"></div>
 <div id="sparkles-layer"></div>
 
-<button class="sound-btn" id="soundBtn">🔇</button>
 
 <!-- ====== ENVELOPE ====== -->
 <div id="envelope-scene">
@@ -479,7 +477,7 @@
       <div class="dua">
         اللَّهُمَّ بَارِكْ لَهُمَا وَبَارِكْ عَلَيْهِمَا<br>
         وَاجْمَعْ بَيْنَهُمَا فِي الْخَيْرِ<br>
-        وَأَعِنْهُمَا بِحَلَالِكَ عَنْ حَرَامِكَ<br>
+        وَأَغْنِهِمَا بِحَلَالِكَ عَنْ حَرَامِكَ<br>
         وَهَبْ لَهُمَا الذُّرِّيَّةَ الصَّالِحَةَ
       </div>
 
@@ -491,14 +489,13 @@
 
       <div class="family-names">
         تَتَشَرَّفُ عَائِلَتَا<br>
-        السَّيِّد <strong>عَبْدُ الوَهَّاب زَغْدُودِي</strong><br>
-        وَالسَّيِّد <strong>عِزُّ الدِّين شَرَّاد</strong><br>
+        <strong>عَبْدُ الوَهَّاب زَغْدُودِي</strong> وَ<strong>عِزُّ الدِّين شَرَّاد</strong><br>
         بِدَعْوَتِكُمْ لِحُضُورِ حَفْلِ زِفَافِ ابْنَيْهِمَا
       </div>
 
       <div class="gold-line"></div>
 
-      <div class="couple-names-ar">فَهْد &amp; إِلْهَام</div>
+      <div class="couple-names-ar">فَهْد <span class="waw">وَ</span> إِلْهَام</div>
       <div class="couple-names-en">Fahd &amp; Elhem</div>
 
       <div class="gold-line"></div>
@@ -513,6 +510,15 @@
         <div class="venue">بِقَاعَةِ الأَفْرَاحِ</div>
         <div class="venue-en">"DAR BOURAOUI - YANI"</div>
         <div class="venue" style="font-size:clamp(13px,2.5vw,17px);font-weight:400;">قَرْطَاج</div>
+      </div>
+
+      <div class="event-details">
+        <div class="event-date">العَشَاء</div>
+        <div class="gold-line" style="margin:10px 0;"></div>
+        <div class="event-time">يَوْمَ الأَحَد 20 دِيسَمْبَر 2026</div>
+        <div class="event-time">بِدَايَةً مِنَ السَّاعَةِ السَّادِسَةِ</div>
+        <div class="gold-line" style="margin:10px 0;"></div>
+        <div class="venue" style="font-size:clamp(13px,2.8vw,18px);">بِمَنْزِلِهِمُ الكَائِنِ بِالمَدِينَةِ الجَدِيدَةِ 3، بِن عَرُوس</div>
       </div>
 
       <div class="gold-line"></div>
@@ -732,14 +738,20 @@ setInterval(updateCountdown,1000);
 
 // ======== SOUND ========
 const audio=document.getElementById('weddingAudio');
-const soundBtn=document.getElementById('soundBtn');
 audio.src='https://www.bensound.com/bensound-music/bensound-romantic.mp3';
 audio.volume=0.22;
-let soundOn=false;
-soundBtn.addEventListener('click',()=>{
-  if(soundOn){audio.pause();soundBtn.textContent='🔇';soundOn=false;}
-  else{audio.play().then(()=>{soundBtn.textContent='🔊';soundOn=true;}).catch(()=>{soundBtn.textContent='🔇';});}
-});
+// Lecture automatique : on tente au chargement ; si le navigateur bloque,
+// la musique démarre au premier geste de l'invité (ex. clic sur « افتح الدعوة »).
+let soundStarted=false;
+function startMusic(){
+  if(soundStarted) return;
+  audio.play().then(()=>{
+    soundStarted=true;
+    ['pointerdown','touchstart','keydown','click'].forEach(ev=>document.removeEventListener(ev,startMusic,true));
+  }).catch(()=>{});
+}
+['pointerdown','touchstart','keydown','click'].forEach(ev=>document.addEventListener(ev,startMusic,true));
+startMusic();
 </script>
 </body>
 </html>
